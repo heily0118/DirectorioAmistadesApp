@@ -6,8 +6,10 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 
 /**
  *
- * @author 
+ * @author Maria Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
  */
-public class DatosObligatoriosException {
-    
+public class DatosObligatoriosException extends RuntimeException{
+    public DatosObligatoriosException(){
+        super("Todos los datos son obligatorios. Ingrese nuevamente el nombre, teléfono y correo.");
+    }
 }

@@ -6,8 +6,10 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 
 /**
  *
- * @author 
+ * @author Maria Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
  */
-public class TelefonoInvalidoException {
-    
+public class TelefonoInvalidoException extends RuntimeException{
+    public TelefonoInvalidoException(){
+        super("El teléfono ingresado no es válido. Debe iniciar con 606 o 30.");
+    }
 }
