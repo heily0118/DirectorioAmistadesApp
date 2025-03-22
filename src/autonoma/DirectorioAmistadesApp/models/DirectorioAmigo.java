@@ -65,7 +65,7 @@ public class DirectorioAmigo {
      */
     public Amigo buscarAmigo(String correoElectronico){
         for (int i = 0; i < amigos.size(); i++) {
-            if (amigos.get(i).getCorreoElectronico().equalsIgnoreCase(correoElectronico)) {
+            if (amigos.get(i).getCorreo().equalsIgnoreCase(correoElectronico)) {
                 return amigos.get(i); 
             }
         }
