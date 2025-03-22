@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Maria Paz Puerta
+ * @author Maria Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
  * @since 20250319
  * @version 1.0.0
  */
