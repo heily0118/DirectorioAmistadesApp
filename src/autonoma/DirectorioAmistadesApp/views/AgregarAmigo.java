@@ -4,18 +4,36 @@
  */
 package autonoma.DirectorioAmistadesApp.views;
 
+import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author USUARIO
  */
 public class AgregarAmigo extends javax.swing.JDialog {
+    private DirectorioAmigo directorio;
 
     /**
      * Creates new form AgregarAmigo
      */
-    public AgregarAmigo(java.awt.Frame parent, boolean modal) {
+    public AgregarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio) {
         super(parent, modal);
         initComponents();
+        setSize(700, 550);
+        setResizable(false);
+        this.setLocationRelativeTo(null);
+        this.directorio = directorio;
+        
+        
+        try{ 
+        this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/directorioAmistad.png")).getImage());
+        
+        }catch(NullPointerException e){
+            System.out.println("Imagen no encontrada");
+            
+        }
+       
     }
 
     /**
