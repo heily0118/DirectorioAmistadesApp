@@ -13,9 +13,7 @@ import javax.swing.ImageIcon;
  */
 public class AgregarAmigo extends javax.swing.JDialog {
     private DirectorioAmigo directorio;
-    /**
-     * Creates new form AgregarAmigo
-     */
+
     public AgregarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio) {
         super(parent, modal);
         initComponents();
@@ -24,13 +22,14 @@ public class AgregarAmigo extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.directorio = directorio;
         
-        try{ 
+        try { 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/directorioAmistad.png")).getImage());
         
         }catch(NullPointerException e){
             System.out.println("Imagen no encontrada");
             
         }
+
     }
 
     /**
@@ -231,4 +230,5 @@ public class AgregarAmigo extends javax.swing.JDialog {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
+
 }
