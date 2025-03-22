@@ -6,8 +6,13 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 
 /**
  *
- * @author USUARIO
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@uatonoma.edu.co>
  */
-public class CorreoInvalidoException {
+public class CorreoInvalidoException extends RuntimeException{
+
+    public CorreoInvalidoException() {
+        super("El correo debe tener un '@'");
+    }
+    
     
 }
