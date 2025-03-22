@@ -7,6 +7,8 @@ package autonoma.DirectorioAmistadesApp.models;
 /**
  *
  * @author Heily Yohana Rios Ayala <heilyy.riosa@uatonoma.edu.co>
+ * @since 20250319
+ * @version 1.0.0
  */
 public class Amigo {
     private String nombre;

@@ -19,8 +19,8 @@ public class DirectorioAmigo {
      */
     private  ArrayList<Amigo> amigos;
     
-    public DirectorioAmigo(ArrayList<Amigo> amigos) {
-        this.amigos = amigos;
+    public DirectorioAmigo() {
+       this.amigos = new ArrayList<>();
     }
     
     /**

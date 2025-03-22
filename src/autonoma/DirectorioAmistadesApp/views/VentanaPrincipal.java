@@ -4,22 +4,27 @@
  */
 package autonoma.DirectorioAmistadesApp.views;
 
+import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import javax.swing.ImageIcon;
 
 /**
  *
  * @author Heily Yohana Rios Ayala <heilyy.riosa@uatonoma.edu.co>
+ * @since 20250319
+ * @version 1.0.0
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
+     private DirectorioAmigo directorio;
 
     /**
      * Creates new form VentanaPrincipal
      */
-    public VentanaPrincipal() {
+    public VentanaPrincipal(DirectorioAmigo directorio) {
         initComponents();
         setSize(700, 550);
         setResizable(false);
         this.setLocationRelativeTo(null);
+        this.directorio = directorio;
         
         
         try{ 
