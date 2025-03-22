@@ -5,7 +5,9 @@
 package autonoma.DirectorioAmistadesApp.views;
 
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
+import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 /**
  *
@@ -243,41 +245,50 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnMostrarInformacionDesarrolladorMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarInformacionDesarrolladorMouseClicked
-        // TODO add your handling code here:
+       InformacionDesarrollador ventanaMostrar= new InformacionDesarrollador(this, true,directorio);
+       ventanaMostrar.setVisible(true);
     }//GEN-LAST:event_btnMostrarInformacionDesarrolladorMouseClicked
 
     private void btnMostrarInformacionDesarrolladorMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarInformacionDesarrolladorMouseEntered
-        // TODO add your handling code here:
+       this.mouseEntered(btnMostrarInformacionDesarrollador);
     }//GEN-LAST:event_btnMostrarInformacionDesarrolladorMouseEntered
 
     private void btnMostrarInformacionDesarrolladorMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarInformacionDesarrolladorMouseExited
-        // TODO add your handling code here:
+        this.mouseExited(btnMostrarInformacionDesarrollador);
     }//GEN-LAST:event_btnMostrarInformacionDesarrolladorMouseExited
 
     private void btnBuscarAmigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarAmigoMouseClicked
-        // TODO add your handling code here:
+       BuscarAmigo ventanaBuscar = new BuscarAmigo(this, true,directorio);
+       ventanaBuscar.setVisible(true);
     }//GEN-LAST:event_btnBuscarAmigoMouseClicked
 
     private void btnBuscarAmigoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarAmigoMouseEntered
-        // TODO add your handling code here:
+        this.mouseEntered(btnBuscarAmigo);
     }//GEN-LAST:event_btnBuscarAmigoMouseEntered
 
     private void btnBuscarAmigoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarAmigoMouseExited
-        // TODO add your handling code here:
+       this.mouseExited(btnBuscarAmigo);
     }//GEN-LAST:event_btnBuscarAmigoMouseExited
 
     private void btnAgregarAmigoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarAmigoMouseEntered
-        // TODO add your handling code here:
+         this.mouseEntered(btnAgregarAmigo);
     }//GEN-LAST:event_btnAgregarAmigoMouseEntered
 
     private void btnAgregarAmigoMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarAmigoMouseExited
-        // TODO add your handling code here:
+        this.mouseExited(btnAgregarAmigo);
     }//GEN-LAST:event_btnAgregarAmigoMouseExited
 
     private void btnAgregarAmigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarAmigoMouseClicked
-        // TODO add your handling code here:
+       AgregarAmigo ventanaAgregar = new AgregarAmigo(this, true,directorio);
+       ventanaAgregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarAmigoMouseClicked
-
+ private void mouseEntered(JPanel panel){
+        panel.setBackground(new Color(200,255,255));
+        
+    }
+    private void mouseExited(JPanel panel){
+        panel.setBackground(new Color(255,255,255));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel btnAgregarAmigo;
