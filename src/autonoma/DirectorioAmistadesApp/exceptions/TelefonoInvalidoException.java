@@ -6,7 +6,7 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 
 /**
  *
- * @author USUARIO
+ * @author 
  */
 public class TelefonoInvalidoException {
     
