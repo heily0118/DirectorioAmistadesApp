@@ -3,10 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package autonoma.DirectorioAmistadesApp.main;
-
+import autonoma.DirectorioAmistadesApp.views.VentanaPrincipal;
 /**
  *
- * @author USUARIO
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@uatonoma.edu.co>
  */
 public class DirectorioAmistadesApp {
 
@@ -15,6 +15,15 @@ public class DirectorioAmistadesApp {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        
+        
+       
+
+        
+        VentanaPrincipal ventana = new VentanaPrincipal();
+        ventana.setVisible(true);
+        
+    
     }
     
 }

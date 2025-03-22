@@ -4,6 +4,8 @@
  */
 package autonoma.DirectorioAmistadesApp.views;
 
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author Heily Yohana Rios Ayala <heilyy.riosa@uatonoma.edu.co>
@@ -15,6 +17,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal() {
         initComponents();
+        setSize(700, 550);
+        setResizable(false);
+        this.setLocationRelativeTo(null);
+        
+        
+        try{ 
+        this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/directorioAmistad.png")).getImage());
+        
+        }catch(NullPointerException e){
+            System.out.println("Imagen no encontrada");
+            
+        }
     }
 
     /**
