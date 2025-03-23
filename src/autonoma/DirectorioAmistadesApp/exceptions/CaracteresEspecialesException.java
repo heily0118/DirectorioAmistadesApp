@@ -6,8 +6,13 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 
 /**
  *
- * @author USUARIO
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  */
-public class CaracteresEspecialesException {
+public class CaracteresEspecialesException extends Exception {
+
+    public CaracteresEspecialesException() {
+        super("No se puede registrar caracteres especiales");
+    }
+    
     
 }
