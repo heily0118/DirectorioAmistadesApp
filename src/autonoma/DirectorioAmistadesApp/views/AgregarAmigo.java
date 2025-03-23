@@ -4,6 +4,8 @@
  */
 package autonoma.DirectorioAmistadesApp.views;
 
+import autonoma.DirectorioAmistadesApp.exceptions.AmigoDuplicadoException;
+import autonoma.DirectorioAmistadesApp.exceptions.CaracteresEspecialesException;
 import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
 import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
 import autonoma.DirectorioAmistadesApp.exceptions.FormatoInvalidoException;
@@ -11,6 +13,7 @@ import autonoma.DirectorioAmistadesApp.exceptions.NumeroTelefonoNegativoExceptio
 import autonoma.DirectorioAmistadesApp.exceptions.TelefonoInvalidoException;
 import autonoma.DirectorioAmistadesApp.models.Amigo;
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
+import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -26,7 +29,7 @@ public class AgregarAmigo extends javax.swing.JDialog {
     public AgregarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio, VentanaPrincipal ventana, Amigo amigo) {
         super(parent, modal);
         initComponents();
-        setSize(700, 550);
+        setSize(650, 500);
         setResizable(false);
         this.setLocationRelativeTo(null);
         this.directorio = directorio;
@@ -85,14 +88,13 @@ public class AgregarAmigo extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(154, 154, 154))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(14, 14, 14))))
+                .addContainerGap(526, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(14, 14, 14))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -240,17 +242,14 @@ public class AgregarAmigo extends javax.swing.JDialog {
 
         try {
             if (nombre.isEmpty() || telefonoStr.isEmpty() || correoElectronico.isEmpty()) {
-
                 throw new DatosObligatoriosException();
-
-
             }
             long telefono = Long.parseLong(telefonoStr);
             if (telefono < 0){
                 throw new NumeroTelefonoNegativoException();
             }
             if (!telefonoStr.startsWith("606") && !telefonoStr.startsWith("30")) {
-                throw new TelefonoInvalidoException("El número de teléfono debe empezar con '606' o '30'.");
+                throw new TelefonoInvalidoException();
             }
             if (!correoElectronico.contains("@")){
                 throw new CorreoInvalidoException();
@@ -264,13 +263,44 @@ public class AgregarAmigo extends javax.swing.JDialog {
                     tieneLetras = true;
                 } else if (Character.isDigit(c)) {
                     tieneNumeros = true;
+                    throw new FormatoInvalidoException();
                 }
             }
             
-            if (tieneLetras && tieneNumeros) {
-                throw new FormatoInvalidoException();
+            
+            for (int i = 0; i < directorio.getAmigos().size(); i++) {
+                if (directorio.getAmigos().get(i).getCorreo().equals(correoElectronico)) {
+                    throw new AmigoDuplicadoException();
+                }
             }
+            
+            String caracteresProhibidos = "!#$%^&*()_=+\\|{};,:/?>";
+            for (int i = 0; i < nombre.length(); i++) {
+                char c = nombre.charAt(i);
+                if (caracteresProhibidos.contains(String.valueOf(c))) {
+                    throw new CaracteresEspecialesException();
+                }
+            }
+
+            for (int i = 0; i < telefonoStr.length(); i++) {
+                char c = telefonoStr.charAt(i);
+                if (caracteresProhibidos.contains(String.valueOf(c))) {
+                    throw new CaracteresEspecialesException();
+                }
+            }
+            
+            for (int i = 0; i < correoElectronico.length(); i++) {
+                char c = correoElectronico.charAt(i);
+                if (caracteresProhibidos.contains(String.valueOf(c))) {
+                    throw new CaracteresEspecialesException();
+                }
+            }
+            
+
+   
+            
             Amigo amigo = new Amigo(nombre, telefono, correoElectronico);
+            
 
             if (this.directorio.agregarAmigo(nombre, telefono, correoElectronico, amigo)) {
                 JOptionPane.showMessageDialog(this, "El amigo " + nombre + " ha sido agregado exitosamente");
@@ -288,6 +318,10 @@ public class AgregarAmigo extends javax.swing.JDialog {
         } catch (CorreoInvalidoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (NumeroTelefonoNegativoException e){
+            JOptionPane.showMessageDialog(this, e.getMessage()); 
+        } catch (AmigoDuplicadoException e){
+            JOptionPane.showMessageDialog(this, e.getMessage()); 
+        } catch (CaracteresEspecialesException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (FormatoInvalidoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());

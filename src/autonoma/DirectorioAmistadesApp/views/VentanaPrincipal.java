@@ -24,7 +24,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
      */
     public VentanaPrincipal(DirectorioAmigo directorio) {
         initComponents();
-        setSize(700, 550);
+        setSize(650, 500);
         setResizable(false);
         this.setLocationRelativeTo(null);
         this.directorio = directorio;

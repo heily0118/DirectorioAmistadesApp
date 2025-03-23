@@ -11,7 +11,7 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 public class AmigoDuplicadoException extends Exception{
 
     public AmigoDuplicadoException() {
-        super("Ya existe un amigo con ese correo");
+        super("Ya existe un amigo con ese correo, lo que significa que el correo ya fue registrado");
     }
     
     

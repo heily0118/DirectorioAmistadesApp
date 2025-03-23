@@ -27,7 +27,7 @@ public class BuscarAmigo extends javax.swing.JDialog {
     public BuscarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio) {
         super(parent, modal);
         initComponents();
-        setSize(700, 550);
+        setSize(650, 500);
         setResizable(false);
         this.setLocationRelativeTo(null);
         this.directorio = directorio;
@@ -68,9 +68,9 @@ public class BuscarAmigo extends javax.swing.JDialog {
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         btnAtras.setBackground(new java.awt.Color(204, 0, 0));
-        btnAtras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAtras.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         btnAtras.setForeground(new java.awt.Color(255, 255, 255));
-        btnAtras.setText("Atras");
+        btnAtras.setText("Atrás");
         btnAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAtrasActionPerformed(evt);
@@ -100,7 +100,7 @@ public class BuscarAmigo extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(40, 40, 40)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(121, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,21 +166,23 @@ public class BuscarAmigo extends javax.swing.JDialog {
                 .addComponent(amigoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 216, Short.MAX_VALUE)
-                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(41, 41, 41)
                         .addComponent(amigoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(49, Short.MAX_VALUE))
         );
 
@@ -208,8 +210,8 @@ public class BuscarAmigo extends javax.swing.JDialog {
 
     private void amigoBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_amigoBuscarMouseClicked
         if (amigoBuscar.getText().equals("Ingrese el correo del amigo a buscar")) {
-        amigoBuscar.setText("");
-        amigoBuscar.setForeground(Color.BLACK);
+            amigoBuscar.setText("");
+            amigoBuscar.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_amigoBuscarMouseClicked
 

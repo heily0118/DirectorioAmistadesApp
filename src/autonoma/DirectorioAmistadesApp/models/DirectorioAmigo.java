@@ -84,11 +84,11 @@ public class DirectorioAmigo {
         String asignatura = "Programación Orientada a Objetos";
 
         String informacion = "Acerca de esta aplicación:\n"
-                            + "---------------------------\n"
+                            + "--------------------------------------------------------------------------------------------------------------------\n"
                             + "Desarrolladoras: " + nombreDesarrollador + "\n"
                             + "Universidad: " + universidad + "\n"
                             + "Asignatura: " + asignatura + "\n"
-                            + "---------------------------";
+                            + "--------------------------------------------------------------------------------------------------------------------";
         return informacion; 
     }
 }
