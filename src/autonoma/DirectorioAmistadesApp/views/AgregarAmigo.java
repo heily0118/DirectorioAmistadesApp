@@ -236,7 +236,7 @@ public class AgregarAmigo extends javax.swing.JDialog {
 
         try {
             if (nombre.isEmpty() || telefonoStr.isEmpty() || correoElectronico.isEmpty()) {
-                throw new DatosObligatoriosException("Debe ingresar todos los campos obligatorios.");
+                throw new DatosObligatoriosException("Debe ingresar todos los campos, estos obligatorios.");
             }
             long telefono = Long.parseLong(telefonoStr);
             Amigo amigo = new Amigo(nombre, telefono, correoElectronico);
@@ -256,7 +256,7 @@ public class AgregarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
