@@ -11,10 +11,7 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 public class DatosObligatoriosException extends Exception{
     
     public DatosObligatoriosException(){
-<<<<<<< HEAD
-        super("Debes llenar el campo, es obligatorio");
-=======
         super("Debe ingresar todos los campos, estos son obligatorios.");
->>>>>>> 9df2870 (Se hicieron pequeños cambios en el diseño)
+
     }
 }
