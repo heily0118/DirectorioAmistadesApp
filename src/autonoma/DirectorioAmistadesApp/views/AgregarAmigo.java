@@ -236,7 +236,7 @@ public class AgregarAmigo extends javax.swing.JDialog {
 
         try {
             if (nombre.isEmpty() || telefonoStr.isEmpty() || correoElectronico.isEmpty()) {
-                throw new DatosObligatoriosException("Debe ingresar todos los campos, estos obligatorios.");
+                throw new DatosObligatoriosException();
             }
             long telefono = Long.parseLong(telefonoStr);
             Amigo amigo = new Amigo(nombre, telefono, correoElectronico);

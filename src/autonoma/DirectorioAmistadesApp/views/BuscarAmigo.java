@@ -6,6 +6,7 @@ package autonoma.DirectorioAmistadesApp.views;
 
 import autonoma.DirectorioAmistadesApp.exceptions.AmigoNoEncontradoException;
 import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
+import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
 import autonoma.DirectorioAmistadesApp.models.Amigo;
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import java.awt.Color;
@@ -213,31 +214,40 @@ public class BuscarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_amigoBuscarMouseClicked
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-     String correoElectronico = amigoBuscar.getText().trim(); 
-
-    if (correoElectronico.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Por favor, ingresa un correo válido.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+    String correoElectronico = amigoBuscar.getText().trim(); 
 
     try {
+       
+        if (correoElectronico.isEmpty()) {
+            throw new DatosObligatoriosException();
+        }
+
        
         if (!correoElectronico.contains("@")) {
             throw new CorreoInvalidoException();
         }
 
         Amigo amigo = directorio.buscarAmigo(correoElectronico); 
-        
-        
+
+        if (amigo == null) {
+            throw new AmigoNoEncontradoException();
+        }
+
         informacionAmigo.setText("Nombre: " + amigo.getNombre() + "\n"
                                 + "Teléfono: " + amigo.getTelefono() + "\n"
                                 + "Correo: " + amigo.getCorreo());
 
-    } catch (CorreoInvalidoException e) { 
+    } catch (DatosObligatoriosException e) {
         JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        informacionAmigo.setText("");
+    } catch (CorreoInvalidoException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
+        informacionAmigo.setText("");
     } catch (AmigoNoEncontradoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-        amigoBuscar.setText(""); 
+        JOptionPane.showMessageDialog(this,e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        informacionAmigo.setText("");
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnBuscarMouseClicked
 

@@ -8,9 +8,9 @@ package autonoma.DirectorioAmistadesApp.exceptions;
  *
  * @author Maria Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
  */
-public class DatosObligatoriosException extends RuntimeException{
+public class DatosObligatoriosException extends Exception{
     
-    public DatosObligatoriosException(String mensaje){
-        super(mensaje);
+    public DatosObligatoriosException(){
+        super("Debes llenar el campo, es obligatorio");
     }
 }

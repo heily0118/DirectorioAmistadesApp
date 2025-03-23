@@ -9,7 +9,7 @@ import javax.swing.ImageIcon;
 
 /**
  *
- * @author USUARIO
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  */
 public class InformacionDesarrollador extends javax.swing.JDialog {
      private DirectorioAmigo directorio;
