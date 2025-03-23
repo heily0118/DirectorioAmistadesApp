@@ -4,9 +4,14 @@
  */
 package autonoma.DirectorioAmistadesApp.views;
 
+import autonoma.DirectorioAmistadesApp.exceptions.AmigoNoEncontradoException;
+import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
+import autonoma.DirectorioAmistadesApp.models.Amigo;
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import java.awt.Color;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -46,6 +51,9 @@ public class BuscarAmigo extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        btnAtras = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        informacionAmigo = new javax.swing.JTextArea();
         jPanel2 = new javax.swing.JPanel();
         btnSalir = new javax.swing.JToggleButton();
         amigoBuscar = new javax.swing.JTextField();
@@ -53,21 +61,52 @@ public class BuscarAmigo extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 550));
         setResizable(false);
         setSize(new java.awt.Dimension(700, 550));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        btnAtras.setBackground(new java.awt.Color(204, 0, 0));
+        btnAtras.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnAtras.setForeground(new java.awt.Color(255, 255, 255));
+        btnAtras.setText("Atras");
+        btnAtras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAtrasActionPerformed(evt);
+            }
+        });
+
+        informacionAmigo.setEditable(false);
+        informacionAmigo.setColumns(20);
+        informacionAmigo.setRows(5);
+        informacionAmigo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                informacionAmigoKeyReleased(evt);
+            }
+        });
+        jScrollPane1.setViewportView(informacionAmigo);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAtras)
+                .addGap(258, 258, 258))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 310, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
+                .addComponent(btnAtras, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -172,16 +211,52 @@ public class BuscarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_amigoBuscarMouseClicked
 
     private void btnBuscarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseClicked
-        // TODO add your handling code here:
+     String correoElectronico = amigoBuscar.getText().trim(); 
+
+    if (correoElectronico.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "Por favor, ingresa un correo válido.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+
+    try {
+       
+        if (!correoElectronico.contains("@")) {
+            throw new CorreoInvalidoException();
+        }
+
+        Amigo amigo = directorio.buscarAmigo(correoElectronico); 
+        
+        
+        informacionAmigo.setText("Nombre: " + amigo.getNombre() + "\n"
+                                + "Teléfono: " + amigo.getTelefono() + "\n"
+                                + "Correo: " + amigo.getCorreo());
+
+    } catch (CorreoInvalidoException e) { 
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    } catch (AmigoNoEncontradoException e) {
+        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        amigoBuscar.setText(""); 
+    }
     }//GEN-LAST:event_btnBuscarMouseClicked
+
+    private void btnAtrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAtrasActionPerformed
+        this.dispose();
+    }//GEN-LAST:event_btnAtrasActionPerformed
+
+    private void informacionAmigoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_informacionAmigoKeyReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_informacionAmigoKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField amigoBuscar;
+    private javax.swing.JButton btnAtras;
     private javax.swing.JPanel btnBuscar;
     private javax.swing.JToggleButton btnSalir;
+    private javax.swing.JTextArea informacionAmigo;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,6 +4,7 @@
  */
 package autonoma.DirectorioAmistadesApp.models;
 
+import autonoma.DirectorioAmistadesApp.exceptions.AmigoNoEncontradoException;
 import java.util.ArrayList;
 
 /**
@@ -63,13 +64,13 @@ public class DirectorioAmigo {
      * @return Retorna a el amigo si se encontro a la persona por medio de su correo electrónco y retorna null si no se
      * encontró.
      */
-    public Amigo buscarAmigo(String correoElectronico){
+    public Amigo buscarAmigo(String correoElectronico) throws AmigoNoEncontradoException{
         for (int i = 0; i < amigos.size(); i++) {
             if (amigos.get(i).getCorreo().equalsIgnoreCase(correoElectronico)) {
                 return amigos.get(i); 
             }
         }
-        return null; 
+       throw new AmigoNoEncontradoException();
     }
     
     /**
