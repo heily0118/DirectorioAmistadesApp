@@ -9,6 +9,7 @@ import autonoma.DirectorioAmistadesApp.exceptions.CaracteresEspecialesException;
 import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
 import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
 import autonoma.DirectorioAmistadesApp.exceptions.FormatoInvalidoException;
+import autonoma.DirectorioAmistadesApp.exceptions.FormatoNumeroInvalidoException;
 import autonoma.DirectorioAmistadesApp.exceptions.NumeroTelefonoNegativoException;
 import autonoma.DirectorioAmistadesApp.exceptions.TelefonoInvalidoException;
 import autonoma.DirectorioAmistadesApp.models.Amigo;
@@ -312,8 +313,8 @@ public class AgregarAmigo extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Ha ocurrido un error, no se ha podido agregar un amigo");
                 this.dispose();
             }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "Número de teléfono inválido. Por favor, ingrese solo números.");
+        } catch (FormatoNumeroInvalidoException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (DatosObligatoriosException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (TelefonoInvalidoException e){

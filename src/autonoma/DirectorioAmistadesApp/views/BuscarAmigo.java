@@ -12,7 +12,6 @@ import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -242,16 +241,14 @@ public class BuscarAmigo extends javax.swing.JDialog {
                                 + "Correo: " + amigo.getCorreo());
 
     } catch (DatosObligatoriosException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, e.getMessage());
         informacionAmigo.setText("");
     } catch (CorreoInvalidoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage(),"Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, e.getMessage());
         informacionAmigo.setText("");
     } catch (AmigoNoEncontradoException e) {
-        JOptionPane.showMessageDialog(this,e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this,e.getMessage());
         informacionAmigo.setText("");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, "Error inesperado: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnBuscarMouseClicked
 
