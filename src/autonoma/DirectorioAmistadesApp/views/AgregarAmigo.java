@@ -4,8 +4,11 @@
  */
 package autonoma.DirectorioAmistadesApp.views;
 
+import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
+import autonoma.DirectorioAmistadesApp.models.Amigo;
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,14 +16,17 @@ import javax.swing.ImageIcon;
  */
 public class AgregarAmigo extends javax.swing.JDialog {
     private DirectorioAmigo directorio;
+    private Amigo amigo;
+    private VentanaPrincipal ventana;
 
-    public AgregarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio) {
+    public AgregarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio, VentanaPrincipal ventana, Amigo amigo) {
         super(parent, modal);
         initComponents();
         setSize(700, 550);
         setResizable(false);
         this.setLocationRelativeTo(null);
         this.directorio = directorio;
+        this.amigo = amigo;
         
         try { 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/directorioAmistad.png")).getImage());
@@ -224,11 +230,33 @@ public class AgregarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCorreoElectronicoActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        // TODO add your handling code here:
+        String nombre = this.txtNombre.getText();
+        String telefonoStr = txtTelefono.getText().trim();
+        String correoElectronico = this.txtCorreoElectronico.getText();
+
+        try {
+            if (nombre.isEmpty() || telefonoStr.isEmpty() || correoElectronico.isEmpty()) {
+                throw new DatosObligatoriosException("Debe ingresar todos los campos, estos obligatorios.");
+            }
+            long telefono = Long.parseLong(telefonoStr);
+            Amigo amigo = new Amigo(nombre, telefono, correoElectronico);
+
+            if (this.directorio.agregarAmigo(nombre, telefono, correoElectronico, amigo)) {
+                JOptionPane.showMessageDialog(this, "El amigo " + nombre + " ha sido agregado exitosamente");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Ha ocurrido un error, no se ha podido agregar un amigo");
+                this.dispose();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Número de teléfono inválido. Por favor, ingrese solo números.");
+        } catch (DatosObligatoriosException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        this.dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed

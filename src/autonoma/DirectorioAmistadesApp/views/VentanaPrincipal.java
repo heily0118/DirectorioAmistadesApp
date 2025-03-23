@@ -4,6 +4,7 @@
  */
 package autonoma.DirectorioAmistadesApp.views;
 
+import autonoma.DirectorioAmistadesApp.models.Amigo;
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import java.awt.Color;
 import javax.swing.ImageIcon;
@@ -62,7 +63,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnSalir = new javax.swing.JToggleButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 550));
         setResizable(false);
         setSize(new java.awt.Dimension(700, 550));
 
@@ -206,7 +206,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(btnBuscarAmigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(57, 57, 57)
                 .addComponent(btnMostrarInformacionDesarrollador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -239,18 +239,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(147, 147, 147)
                 .addComponent(jLabel7)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(16, 16, 16))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(16, 16, 16)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -308,7 +308,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarAmigoMouseExited
 
     private void btnAgregarAmigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarAmigoMouseClicked
-       AgregarAmigo ventanaAgregar = new AgregarAmigo(this, true,directorio);
+       Amigo amigo = null;
+       AgregarAmigo ventanaAgregar = new AgregarAmigo(this, true,directorio, this, amigo);
        ventanaAgregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarAmigoMouseClicked
 

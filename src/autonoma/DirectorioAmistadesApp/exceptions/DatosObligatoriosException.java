@@ -10,7 +10,7 @@ package autonoma.DirectorioAmistadesApp.exceptions;
  */
 public class DatosObligatoriosException extends RuntimeException{
     
-    public DatosObligatoriosException(){
-        super("Todos los datos son obligatorios. Ingrese nuevamente el nombre, teléfono y correo.");
+    public DatosObligatoriosException(String mensaje){
+        super(mensaje);
     }
 }
