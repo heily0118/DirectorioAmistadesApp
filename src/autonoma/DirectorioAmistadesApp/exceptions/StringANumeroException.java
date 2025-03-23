@@ -6,8 +6,14 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 
 /**
  *
- * @author USUARIO
+ * @author Heily Yohana Rios Ayala<heilyy.riosa@autonoma.edu.co>
  */
-public class StringANumeroException {
+public class StringANumeroException extends RuntimeException{
+
+    public StringANumeroException() {
+        super("No se puede convertir una cadena de texto a un número");
+    }
+    
+    
     
 }

@@ -6,8 +6,13 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 
 /**
  *
- * @author USUARIO
+ * @author Heily Yohana Rios Ayala<heilyy.riosa@autonoma.edu.co>
  */
-public class NumeroAStringException {
+public class NumeroAStringException  extends RuntimeException{
+
+    public NumeroAStringException() {
+        super("No se puede convertir un número a un string");
+    }
+    
     
 }

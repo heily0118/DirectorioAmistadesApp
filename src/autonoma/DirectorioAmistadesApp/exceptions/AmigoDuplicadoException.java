@@ -8,7 +8,7 @@ package autonoma.DirectorioAmistadesApp.exceptions;
  *
  * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  */
-public class AmigoDuplicadoException extends RuntimeException{
+public class AmigoDuplicadoException extends Exception{
 
     public AmigoDuplicadoException() {
         super("Ya existe un amigo con ese correo");

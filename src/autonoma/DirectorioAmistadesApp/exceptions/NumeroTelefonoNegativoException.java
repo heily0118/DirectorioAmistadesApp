@@ -6,11 +6,13 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 
 /**
  *
- * @author Maria Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
+ * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
  */
-public class TelefonoInvalidoException extends Exception{
-    
-    public TelefonoInvalidoException(){
-        super("El teléfono ingresado no es válido. Debe iniciar con 606 o 30.");
+public class NumeroTelefonoNegativoException extends Exception{
+
+    public NumeroTelefonoNegativoException() {
+        super("El numero de telefono no puede ser negativo");
     }
+    
+    
 }
