@@ -296,8 +296,6 @@ public class AgregarAmigo extends javax.swing.JDialog {
                 }
             }
             
-
-   
             
             Amigo amigo = new Amigo(nombre, telefono, correoElectronico);
             
