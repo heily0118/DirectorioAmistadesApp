@@ -4,7 +4,9 @@
  */
 package autonoma.DirectorioAmistadesApp.views;
 
+import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
 import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
+import autonoma.DirectorioAmistadesApp.exceptions.TelefonoInvalidoException;
 import autonoma.DirectorioAmistadesApp.models.Amigo;
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import javax.swing.ImageIcon;
@@ -12,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author USUARIO
+ * @author María Paz Puerta Acevedo <mariap.puertaa@autonoma.edu.co>
  */
 public class AgregarAmigo extends javax.swing.JDialog {
     private DirectorioAmigo directorio;
@@ -236,7 +238,13 @@ public class AgregarAmigo extends javax.swing.JDialog {
 
         try {
             if (nombre.isEmpty() || telefonoStr.isEmpty() || correoElectronico.isEmpty()) {
-                throw new DatosObligatoriosException("Debe ingresar todos los campos, estos obligatorios.");
+                throw new DatosObligatoriosException("Debe ingresar todos los campos, estos son obligatorios.");
+            }
+            if (!telefonoStr.startsWith("606") && !telefonoStr.startsWith("30")) {
+                throw new TelefonoInvalidoException("El número de teléfono debe empezar con '606' o '30'.");
+            }
+            if (!correoElectronico.contains("@")){
+                throw new CorreoInvalidoException("El correo electrónico debe contener '@'.");
             }
             long telefono = Long.parseLong(telefonoStr);
             Amigo amigo = new Amigo(nombre, telefono, correoElectronico);
@@ -251,6 +259,10 @@ public class AgregarAmigo extends javax.swing.JDialog {
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Número de teléfono inválido. Por favor, ingrese solo números.");
         } catch (DatosObligatoriosException e) {
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (TelefonoInvalidoException e){
+            JOptionPane.showMessageDialog(this, e.getMessage());
+        } catch (CorreoInvalidoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
     }//GEN-LAST:event_btnAgregarActionPerformed

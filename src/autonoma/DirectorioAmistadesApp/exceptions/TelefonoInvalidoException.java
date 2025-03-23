@@ -10,7 +10,7 @@ package autonoma.DirectorioAmistadesApp.exceptions;
  */
 public class TelefonoInvalidoException extends Exception{
     
-    public TelefonoInvalidoException(){
-        super("El teléfono ingresado no es válido. Debe iniciar con 606 o 30.");
+    public TelefonoInvalidoException(String mensaje){
+        super(mensaje);
     }
 }

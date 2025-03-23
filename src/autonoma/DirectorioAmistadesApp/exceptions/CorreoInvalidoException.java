@@ -10,8 +10,8 @@ package autonoma.DirectorioAmistadesApp.exceptions;
  */
 public class CorreoInvalidoException extends Exception{
 
-    public CorreoInvalidoException() {
-        super("El correo debe tener un '@'");
+    public CorreoInvalidoException(String mensaje) {
+        super(mensaje);
     }
     
     
