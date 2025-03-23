@@ -11,7 +11,7 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 public class ListaDeAmigosVaciaException  extends Exception{
 
     public ListaDeAmigosVaciaException() {
-        super("La lista de amigos esta vacia");
+        super("La lista de amigos esta vacia.");
     }
     
     
