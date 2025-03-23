@@ -46,7 +46,7 @@ public class DirectorioAmigo {
      * @param correoElectronico El correo electrónico de el amigo a agregar.
      * @return Retorna true si el amigo no existe en la lista y retorna false si ya existe un mismo nombre.
      */
-    public boolean agregarAmigo(String nombre, long telefono, String correoElectronico){
+    public boolean agregarAmigo(String nombre, long telefono, String correoElectronico, Amigo amigo){
         for (int i = 0; i < amigos.size(); i++) {
             if (amigos.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 return false;
