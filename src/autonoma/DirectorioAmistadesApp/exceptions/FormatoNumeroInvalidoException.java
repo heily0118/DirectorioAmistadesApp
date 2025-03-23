@@ -6,14 +6,13 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 
 /**
  *
- * @author Heily Yohana Rios Ayala <heilyy.riosa@autonoma.edu.co>
+ * @author Heily Yohana Rios Ayala < heilyy.riosa@autonoma.edu.co>
  */
-public class ListaDeAmigosVaciaException  extends Exception{
+public class FormatoNumeroInvalidoException extends RuntimeException{
 
-    public ListaDeAmigosVaciaException() {
-        super("La lista de amigos esta vacia.");
+    public FormatoNumeroInvalidoException() {
+        super("Número de teléfono inválido. Por favor, ingrese solo números.");
     }
-    
     
     
 }
