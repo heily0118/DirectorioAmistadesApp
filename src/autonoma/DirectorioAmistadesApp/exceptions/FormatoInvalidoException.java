@@ -11,7 +11,7 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 public class FormatoInvalidoException extends RuntimeException{
 
     public FormatoInvalidoException() {
-        super("El formato no es invalido!");
+        super("El formato es invalido!");
     }
     
     
