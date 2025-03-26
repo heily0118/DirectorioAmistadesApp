@@ -44,6 +44,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.directorio = directorio;
         this.amigo = amigo;
+        this.ventana = ventana;
         this.llenarTabla();
         
         try { 
@@ -199,7 +200,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
         int fila = this.tablaAmigos.getSelectedRow();
         if(fila >= 0){
             Amigo amigo = this.amigos.get(fila);
-            ActualizarLibro ventanaActualizar = new ActualizarLibro(this.VentanaPrincipal, true, directorio, this, amigo);
+            ActualizarAmigo ventanaActualizar = new ActualizarAmigo(this.ventana, true, directorio, this, amigo);
             ventanaActualizar.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione el libro que desea actualizar");
