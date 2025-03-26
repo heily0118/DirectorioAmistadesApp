@@ -16,6 +16,8 @@ import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -349,6 +351,7 @@ public class ActualizarAmigo extends javax.swing.JDialog {
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
