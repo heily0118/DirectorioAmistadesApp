@@ -95,6 +95,8 @@ public class MostrarAmigo extends javax.swing.JDialog {
         });
 
         tabla.setBackground(new java.awt.Color(255, 255, 255));
+        tabla.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tabla.setViewportBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         tablaAmigos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -149,11 +151,11 @@ public class MostrarAmigo extends javax.swing.JDialog {
                 .addGap(21, 21, 21))
         );
 
-        jPanel1.setBackground(new java.awt.Color(0, 204, 204));
+        jPanel1.setBackground(new java.awt.Color(153, 153, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
 
         jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 36)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(51, 51, 51));
         jLabel1.setText("Mostrar Amigos");
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/salir.png"))); // NOI18N
