@@ -38,7 +38,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
     /**
      * Creates new form MostrarAmigo
      */
-    public MostrarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio, VentanaPrincipal ventana, Amigo amigo) {
+    public MostrarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio) {
         super(parent, modal);
         initComponents();
         setSize(650, 500);
