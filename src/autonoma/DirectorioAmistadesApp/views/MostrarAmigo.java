@@ -13,8 +13,10 @@ import autonoma.DirectorioAmistadesApp.exceptions.FormatoInvalidoException;
 import autonoma.DirectorioAmistadesApp.exceptions.FormatoNumeroInvalidoException;
 import autonoma.DirectorioAmistadesApp.exceptions.NumeroTelefonoNegativoException;
 import autonoma.DirectorioAmistadesApp.exceptions.TelefonoInvalidoException;
+
 import autonoma.DirectorioAmistadesApp.models.Amigo;
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
+import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -33,7 +35,6 @@ public class MostrarAmigo extends javax.swing.JDialog {
     private Amigo amigo;
     private ArrayList<Amigo> amigos;
     private VentanaPrincipal ventana;
-  
     /**
      * Creates new form MostrarAmigo
      */
@@ -136,8 +137,9 @@ public class MostrarAmigo extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnActualizar)
-                    .addComponent(btnCancelar)
-                    .addComponent(btnEliminar))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(btnEliminar)
+                        .addComponent(btnCancelar)))
                 .addGap(16, 16, 16))
         );
         jPanel2Layout.setVerticalGroup(
@@ -145,7 +147,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(35, 35, 35)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -215,7 +217,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
         int fila = this.tablaAmigos.getSelectedRow();
         if(fila >= 0){
             Amigo amigo = this.amigos.get(fila);
-            ActualizarAmigo ventanaActualizar = new ActualizarAmigo(this.ventana, true, directorio, this, amigo);
+            ActualizarAmigo ventanaActualizar = new ActualizarAmigo(ventana, true, directorio, ventana, amigo);
             ventanaActualizar.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione el libro que desea actualizar");

@@ -231,7 +231,6 @@ public class ActualizarAmigo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
     private void txtNuevoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNuevoNombreActionPerformed
@@ -331,14 +330,14 @@ public class ActualizarAmigo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
         long telefono = Long.parseLong(nuevoTelefono);
-        amigo.setNombre(nuevoNombre);
-        amigo.setTelefono(telefono);
-        amigo.setCorreo(nuevoCorreoElectronico);
+        String nombre = this.txtNuevoNombre.getText();
+            
+        this.directorio.actualizarAmigo(this.amigo.getNombre(), this.amigo.getTelefono(), this.amigo.getCorreo(), new Amigo(nombre, telefono, this.amigo.getCorreo()));
 
-        JOptionPane.showMessageDialog(this, "El amigo " + nuevoNombre + " ha sido actualizado exitosamente");
+        JOptionPane.showMessageDialog(this, "El amigo " + nombre + " ha sido actualizado exitosamente");
 
-        actualizarTabla();
-
+        this.ventana.llenarTabla();
+            
         this.dispose();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
@@ -349,8 +348,6 @@ public class ActualizarAmigo extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
-
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;

@@ -72,11 +72,12 @@ public class DirectorioAmigo {
         }
       return null;
     }
-    
-    public boolean actualizarAmigo(String nombre, long telefono, String correo, Amigo nuevoLibro) {
+
+    public boolean actualizarAmigo(String nombre, long telefono, String correo, Amigo nuevoAmigo){
         for (int i = 0; i < amigos.size(); i++) {
-            if (amigos.get(i).getNombre() == nombre && amigos.get(i).getTelefono() == telefono && amigos.get(i).getCorreo() == correo) {
-                amigos.set(i, nuevoLibro);
+            Amigo amigo = amigos.get(i);
+            if (amigo.getNombre().equals(nombre) && amigo.getTelefono() == telefono && amigo.getCorreo().equals(correo)) {
+                amigos.set(i, nuevoAmigo);
                 return true;
             }
         }
@@ -90,11 +91,11 @@ public class DirectorioAmigo {
         }
     }
     return false;
-}
+   }
     
-public ArrayList<Amigo> obtenerTodosLosAmigos() {
-    return new ArrayList<>(amigos);
-}
+    public ArrayList<Amigo> obtenerTodosLosAmigos() {
+       return new ArrayList<>(amigos);
+    }
     /**
      * Proporciona información sobre la aplicación, incluyendo los nombres de los desarrolladores,
      * la universidad y la asignatura en la que se desarrolló.
