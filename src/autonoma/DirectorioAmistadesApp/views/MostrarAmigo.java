@@ -17,6 +17,9 @@ import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
 
@@ -27,7 +30,9 @@ import javax.swing.JOptionPane;
 public class MostrarAmigo extends javax.swing.JDialog {
     private DirectorioAmigo directorio;
     private Amigo amigo;
+    private ArrayList<Amigo> amigos;
     private VentanaPrincipal ventana;
+    private JTable tabla;
     /**
      * Creates new form MostrarAmigo
      */
@@ -39,6 +44,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.directorio = directorio;
         this.amigo = amigo;
+        this.llenarTabla();
         
         try { 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/directorioAmistad.png")).getImage());
@@ -59,10 +65,10 @@ public class MostrarAmigo extends javax.swing.JDialog {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        btnAgregar = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla = new javax.swing.JScrollPane();
+        tablaAmigos = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JToggleButton();
@@ -72,13 +78,13 @@ public class MostrarAmigo extends javax.swing.JDialog {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 102, 102)));
 
-        btnAgregar.setBackground(new java.awt.Color(0, 153, 102));
-        btnAgregar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAgregar.setText("Agregar");
-        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+        btnActualizar.setBackground(new java.awt.Color(0, 153, 102));
+        btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setText("Actualizar");
+        btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAgregarActionPerformed(evt);
+                btnActualizarActionPerformed(evt);
             }
         });
 
@@ -92,9 +98,9 @@ public class MostrarAmigo extends javax.swing.JDialog {
             }
         });
 
-        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        tabla.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaAmigos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -105,7 +111,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
                 "Nombre", "Télefono", "Correo Electrónico"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        tabla.setViewportView(tablaAmigos);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -113,10 +119,10 @@ public class MostrarAmigo extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
+                .addComponent(tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAgregar)
+                    .addComponent(btnActualizar)
                     .addComponent(btnCancelar))
                 .addGap(16, 16, 16))
         );
@@ -124,13 +130,13 @@ public class MostrarAmigo extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
-                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
 
@@ -153,7 +159,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -166,7 +172,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(89, 89, 89))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -189,93 +195,17 @@ public class MostrarAmigo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        String nombre = this.txtNombre.getText();
-        String telefonoStr = txtTelefono.getText().trim();
-        String correoElectronico = this.txtCorreoElectronico.getText();
-
-        try {
-            if (nombre.isEmpty() || telefonoStr.isEmpty() || correoElectronico.isEmpty()) {
-                throw new DatosObligatoriosException();
-            }
-            long telefono = Long.parseLong(telefonoStr);
-            if (telefono < 0){
-                throw new NumeroTelefonoNegativoException();
-            }
-            if (!telefonoStr.startsWith("606") && !telefonoStr.startsWith("30")) {
-                throw new TelefonoInvalidoException();
-            }
-            if (!correoElectronico.contains("@")){
-                throw new CorreoInvalidoException();
-            }
-
-            boolean tieneLetras = false;
-            boolean tieneNumeros = false;
-            for (int i = 0; i < nombre.length(); i++) {
-                char c = nombre.charAt(i);
-                if (Character.isLetter(c)) {
-                    tieneLetras = true;
-                } else if (Character.isDigit(c)) {
-                    tieneNumeros = true;
-                    throw new FormatoInvalidoException();
-                }
-            }
-
-            for (int i = 0; i < directorio.getAmigos().size(); i++) {
-                if (directorio.getAmigos().get(i).getCorreo().equals(correoElectronico)) {
-                    throw new AmigoDuplicadoException();
-                }
-            }
-
-            String caracteresProhibidos = "!#$%^&*()_=+\\|{};,:/?>";
-            for (int i = 0; i < nombre.length(); i++) {
-                char c = nombre.charAt(i);
-                if (caracteresProhibidos.contains(String.valueOf(c))) {
-                    throw new CaracteresEspecialesException();
-                }
-            }
-
-            for (int i = 0; i < telefonoStr.length(); i++) {
-                char c = telefonoStr.charAt(i);
-                if (caracteresProhibidos.contains(String.valueOf(c))) {
-                    throw new CaracteresEspecialesException();
-                }
-            }
-
-            for (int i = 0; i < correoElectronico.length(); i++) {
-                char c = correoElectronico.charAt(i);
-                if (caracteresProhibidos.contains(String.valueOf(c))) {
-                    throw new CaracteresEspecialesException();
-                }
-            }
-
-            Amigo amigo = new Amigo(nombre, telefono, correoElectronico);
-
-            if (this.directorio.agregarAmigo(nombre, telefono, correoElectronico, amigo)) {
-                JOptionPane.showMessageDialog(this, "El amigo " + nombre + " ha sido actualizado exitosamente");
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error, no se ha podido actualizar a el amigo");
-                this.dispose();
-            }
-        } catch (FormatoNumeroInvalidoException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (DatosObligatoriosException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (TelefonoInvalidoException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (CorreoInvalidoException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (NumeroTelefonoNegativoException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (AmigoDuplicadoException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (CaracteresEspecialesException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (FormatoInvalidoException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
+    private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
+        int fila = this.tablaAmigos.getSelectedRow();
+        if(fila >= 0){
+            Amigo amigo = this.amigos.get(fila);
+            ActualizarLibro ventanaActualizar = new ActualizarLibro(this.VentanaPrincipal, true, directorio, this, amigo);
+            ventanaActualizar.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione el libro que desea actualizar");
         }
-    }//GEN-LAST:event_btnAgregarActionPerformed
+        
+    }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         this.dispose();
@@ -284,17 +214,31 @@ public class MostrarAmigo extends javax.swing.JDialog {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
+    public void llenarTabla() {
+    // 1. Modificar el modelo de la tabla para que tenga las columnas correctas
+        DefaultTableModel modelDefault = new DefaultTableModel(new String[]{"Nombre", "Telefono", "Correo Electronico"}, this.amigos.size());
+        this.tablaAmigos.setModel(modelDefault);
 
+        TableModel dataModel = tablaAmigos.getModel();
+
+    // 2. Llenar la tabla con los datos de los libros
+        for (int i = 0; i < this.amigos.size(); i++) {
+            Amigo amigo = this.amigos.get(i);
+            dataModel.setValueAt(amigo.getNombre(), i, 0);       
+            dataModel.setValueAt(amigo.getTelefono(), i, 1);    
+            dataModel.setValueAt(amigo.getCorreo(), i, 2);
+        }      
+    }
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JToggleButton btnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JScrollPane tabla;
+    private javax.swing.JTable tablaAmigos;
     // End of variables declaration//GEN-END:variables
 }
