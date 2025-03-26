@@ -5,6 +5,7 @@
 package autonoma.DirectorioAmistadesApp.views;
 
 import autonoma.DirectorioAmistadesApp.exceptions.AmigoDuplicadoException;
+import autonoma.DirectorioAmistadesApp.exceptions.AmigoNoEncontradoException;
 import autonoma.DirectorioAmistadesApp.exceptions.CaracteresEspecialesException;
 import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
 import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
@@ -231,28 +232,31 @@ public class MostrarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
-       int filaSeleccionada = tablaAmigos.getSelectedRow();
+      int filaSeleccionada = tablaAmigos.getSelectedRow();
+    
     if (filaSeleccionada == -1) {
         JOptionPane.showMessageDialog(this, "Por favor, selecciona un amigo de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
         return;
     }
 
-    long correoAmigo = Long.parseLong(tablaAmigos.getValueAt(filaSeleccionada, 1).toString());
+   
+    String correoAmigo = tablaAmigos.getValueAt(filaSeleccionada, 1).toString();
 
-    Amigo amigoExistente = DirectorioAmigo.buscarAmigo(correoAmigo);
-    if (amigoExistente == null) {
-        JOptionPane.showMessageDialog(this, "No se encontró el amigo en el directorio.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+   
+    try {
+        Amigo amigoExistente = directorio.buscarAmigo(correoAmigo);  
 
-    int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este amigo?", "Confirmación", JOptionPane.YES_NO_OPTION);
-    if (confirmacion == JOptionPane.YES_OPTION) {
-        if (DirectorioAmigo.eliminarAmigo(correoAmigo)) {
-            JOptionPane.showMessageDialog(this, "Amigo eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-            actualizarTabla(DirectorioAmigo.obtenerTodosLosAmigos());  
-        } else {
-            JOptionPane.showMessageDialog(this, "No se pudo eliminar el amigo.", "Error", JOptionPane.ERROR_MESSAGE);
+        int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este amigo?", "Confirmación", JOptionPane.YES_NO_OPTION);
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            if (directorio.eliminarAmigo(correoAmigo)) {  
+                JOptionPane.showMessageDialog(this, "Amigo eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                actualizarTabla(directorio.getAmigos());  
+            } else {
+                JOptionPane.showMessageDialog(this, "No se pudo eliminar el amigo.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
+    } catch (AmigoNoEncontradoException e) {
+        JOptionPane.showMessageDialog(this, "No se encontró el amigo en el directorio.", "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnEliminarActionPerformed
     public void llenarTabla() {
