@@ -100,23 +100,25 @@ public class DirectorioAmigo {
      * @param correoElectronico El correo electónico del amigo a eliminar.
      * @return Retorna true si el amigo fue eliminado y false si no se encontró el amigo en la lista.
      */
-    public boolean eliminarAmigo(String correoElectronico) {
+    public boolean eliminarAmigo(String correoElectronico) throws AmigoNoEncontradoException {
         for (int i = 0; i < amigos.size(); i++) {
-            if (amigos.get(i).getCorreo().equalsIgnoreCase(correoElectronico)) {
-                amigos.remove(i);
-                return true;
-            }
+        if (amigos.get(i).getCorreo().equalsIgnoreCase(correoElectronico)) {
+            amigos.remove(i);
+            return true;
         }
-        return false;
+    }
+    throw new AmigoNoEncontradoException();
+
     }
     
     /**
      * Obtiene una copia de la lista de todos los amigos almacenados.
      * @return Retorna una nueva lista que contiene todos los amigos.
      */
-    public ArrayList<Amigo> obtenerTodosLosAmigos() {
-       return new ArrayList<>(amigos);
-    }
+   public ArrayList<Amigo> obtenerTodosLosAmigos() {
+    return amigos;
+}
+
     
     /**
      * Proporciona información sobre la aplicación, incluyendo los nombres de los desarrolladores,

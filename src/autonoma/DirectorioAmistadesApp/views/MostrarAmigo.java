@@ -231,57 +231,37 @@ public class MostrarAmigo extends javax.swing.JDialog {
 
     int filaSeleccionada = tablaAmigos.getSelectedRow();
     
-    if (filaSeleccionada != -1) { 
-        String nombre = (String) tablaAmigos.getValueAt(filaSeleccionada, 0); 
-        String correo = (String) tablaAmigos.getValueAt(filaSeleccionada, 2); 
-        
-      
-        int confirmacion = JOptionPane.showConfirmDialog(
-            this, 
-            "¿Seguro que deseas eliminar a " + nombre + "?", 
-            "Confirmar eliminación", 
-            JOptionPane.YES_NO_OPTION
-        );
+    if (filaSeleccionada == -1) {  
+        JOptionPane.showMessageDialog(this, "Por favor, selecciona un amigo de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
 
-        if (confirmacion == JOptionPane.YES_OPTION) { 
-            boolean eliminado = directorio.eliminarAmigo(correo);
-            
+    DefaultTableModel modelo = (DefaultTableModel) tablaAmigos.getModel();
+    
+    String nombre = (String) modelo.getValueAt(filaSeleccionada, 0);  
+    String correo = (String) modelo.getValueAt(filaSeleccionada, 2);  
+
+    int confirmacion = JOptionPane.showConfirmDialog(
+        this, 
+        "¿Seguro que deseas eliminar a " + nombre + "?", 
+        "Confirmar eliminación", 
+        JOptionPane.YES_NO_OPTION
+    );
+
+    if (confirmacion == JOptionPane.YES_OPTION) {  
+        try {
+            boolean eliminado = directorio.eliminarAmigo(correo);  
+
             if (eliminado) {
-                ((DefaultTableModel) tablaAmigos.getModel()).removeRow(filaSeleccionada);
+                modelo.removeRow(filaSeleccionada);  
                 JOptionPane.showMessageDialog(this, "Contacto eliminado con éxito.");
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo eliminar el contacto.", "Error", JOptionPane.ERROR_MESSAGE);
             }
-        }
-    } else {
-        JOptionPane.showMessageDialog(this, "Seleccione un contacto para eliminar.", "Aviso", JOptionPane.WARNING_MESSAGE);
-    }
-
-    
-        if (filaSeleccionada == -1) {
-            JOptionPane.showMessageDialog(this, "Por favor, selecciona un amigo de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-
-   
-        String correoAmigo = tablaAmigos.getValueAt(filaSeleccionada, 1).toString();
-
-   
-        try {
-            Amigo amigoExistente = directorio.buscarAmigo(correoAmigo);  
-
-            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este amigo?", "Confirmación", JOptionPane.YES_NO_OPTION);
-            if (confirmacion == JOptionPane.YES_OPTION) {
-                if (directorio.eliminarAmigo(correoAmigo)) {  
-                    JOptionPane.showMessageDialog(this, "Amigo eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    llenarTabla(directorio.getAmigos());
-                } else {
-                    JOptionPane.showMessageDialog(this, "No se pudo eliminar el amigo.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-            }
         } catch (AmigoNoEncontradoException e) {
             JOptionPane.showMessageDialog(this, "No se encontró el amigo en el directorio.", "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
     }//GEN-LAST:event_btnEliminarActionPerformed
     public void llenarTabla(ArrayList<Amigo> amigos) {
     
