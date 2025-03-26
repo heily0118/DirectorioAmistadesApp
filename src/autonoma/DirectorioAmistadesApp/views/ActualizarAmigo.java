@@ -231,6 +231,7 @@ public class ActualizarAmigo extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+<<<<<<< HEAD
     private void txtNuevoNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNuevoNombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNuevoNombreActionPerformed
@@ -350,6 +351,9 @@ public class ActualizarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
 
+=======
+   
+>>>>>>> 468c2c3f1e0768df42086e27b6543abd5516e0bf
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnCancelar;
