@@ -357,15 +357,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnMostrarAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarAmigosMouseClicked
-        // TODO add your handling code here:
+      MostrarAmigo ventanaMostrar = new MostrarAmigo(this, true,directorio, this, amigo);
+       ventanaMostrar.setVisible(true);
     }//GEN-LAST:event_btnMostrarAmigosMouseClicked
 
     private void btnMostrarAmigosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarAmigosMouseEntered
-        // TODO add your handling code here:
+        this.mouseEntered(btnMostrarAmigos);
     }//GEN-LAST:event_btnMostrarAmigosMouseEntered
 
     private void btnMostrarAmigosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarAmigosMouseExited
-        // TODO add your handling code here:
+        this.mouseExited(btnMostrarAmigos);
     }//GEN-LAST:event_btnMostrarAmigosMouseExited
  private void mouseEntered(JPanel panel){
         panel.setBackground(new Color(200,255,255));
