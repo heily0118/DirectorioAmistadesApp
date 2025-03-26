@@ -70,13 +70,10 @@ public class DirectorioAmigo {
                 return amigos.get(i); 
             }
         }
-       throw new AmigoNoEncontradoException();
+      return null;
     }
-    
-    public boolean actualizarAmigo(String nombre, long telefono, String correo, Amigo nuevoAmigo) {
-        if (nuevoAmigo == null) {
-            throw new IllegalArgumentException("El nuevo amigo no puede ser nulo.");
-        }
+
+    public boolean actualizarAmigo(String nombre, long telefono, String correo, Amigo nuevoAmigo){
         for (int i = 0; i < amigos.size(); i++) {
             Amigo amigo = amigos.get(i);
             if (amigo.getNombre().equals(nombre) && amigo.getTelefono() == telefono && amigo.getCorreo().equals(correo)) {
@@ -84,8 +81,20 @@ public class DirectorioAmigo {
                 return true;
             }
         }
-        
         return false;
+    }
+    public boolean eliminarAmigo(String correoElectronico) {
+    for (int i = 0; i < amigos.size(); i++) {
+        if (amigos.get(i).getCorreo().equalsIgnoreCase(correoElectronico)) {
+            amigos.remove(i);
+            return true;
+        }
+    }
+    return false;
+   }
+    
+    public ArrayList<Amigo> obtenerTodosLosAmigos() {
+       return new ArrayList<>(amigos);
     }
     /**
      * Proporciona información sobre la aplicación, incluyendo los nombres de los desarrolladores,
