@@ -205,15 +205,16 @@ public class MostrarAmigo extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        int fila = this.tablaAmigos.getSelectedRow();
-        if(fila >= 0){
-            Amigo amigo = this.amigos.get(fila);
-            ActualizarAmigo ventanaActualizar = new ActualizarAmigo(ventana, true, directorio, ventana, amigo);
-            ventanaActualizar.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione el amigo que desea actualizar");
-        }
-        
+       int fila = this.tablaAmigos.getSelectedRow();
+    
+    if (fila >= 0) {
+        Amigo amigo = this.amigos.get(fila);
+        ActualizarAmigo ventanaActualizar = new ActualizarAmigo(ventana, true, directorio, ventana, amigo);
+        ventanaActualizar.setVisible(true);
+        llenarTabla(directorio.getAmigos());
+    } else {
+        JOptionPane.showMessageDialog(this, "Por favor, seleccione el amigo que desea actualizar");
+    }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -228,10 +229,10 @@ public class MostrarAmigo extends javax.swing.JDialog {
     int filaSeleccionada = tablaAmigos.getSelectedRow();
     
     if (filaSeleccionada != -1) { 
-        String nombre = (String) tablaAmigos.getValueAt(filaSeleccionada, 0); // Suponiendo que el nombre está en la columna 0
-        String correo = (String) tablaAmigos.getValueAt(filaSeleccionada, 2); // El correo está en la columna 2
+        String nombre = (String) tablaAmigos.getValueAt(filaSeleccionada, 0); 
+        String correo = (String) tablaAmigos.getValueAt(filaSeleccionada, 2); 
         
-        // Mostrar cuadro de confirmación
+      
         int confirmacion = JOptionPane.showConfirmDialog(
             this, 
             "¿Seguro que deseas eliminar a " + nombre + "?", 
@@ -239,7 +240,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
             JOptionPane.YES_NO_OPTION
         );
 
-        if (confirmacion == JOptionPane.YES_OPTION) { // Si el usuario confirma
+        if (confirmacion == JOptionPane.YES_OPTION) { 
             boolean eliminado = directorio.eliminarAmigo(correo);
             
             if (eliminado) {
@@ -254,17 +255,19 @@ public class MostrarAmigo extends javax.swing.JDialog {
     }
     }//GEN-LAST:event_btnEliminarActionPerformed
    public void llenarTabla(ArrayList<Amigo> amigos) {
-    DefaultTableModel modelDefault = new DefaultTableModel(new String[]{"Nombre", "Teléfono", "Correo Electrónico"}, amigos.size());
-    this.tablaAmigos.setModel(modelDefault);
-
-    TableModel dataModel = tablaAmigos.getModel();
-
-    for (int i = 0; i < amigos.size(); i++) {
-        Amigo amigo = amigos.get(i);
-        dataModel.setValueAt(amigo.getNombre(), i, 0);
-        dataModel.setValueAt(amigo.getTelefono(), i, 1);
-        dataModel.setValueAt(amigo.getCorreo(), i, 2);
+    
+    DefaultTableModel modelo = new DefaultTableModel(new String[]{"Nombre", "Teléfono", "Correo Electrónico"}, 0);
+    
+    for (Amigo amigo : amigos) {
+        modelo.addRow(new Object[]{
+            amigo.getNombre(),
+            amigo.getTelefono(),
+            amigo.getCorreo()
+        });
     }
+
+    
+    this.tablaAmigos.setModel(modelo);
 }
 
  
