@@ -73,13 +73,18 @@ public class DirectorioAmigo {
        throw new AmigoNoEncontradoException();
     }
     
-    public boolean actualizarLibro(String nombre, long telefono, String correo, Amigo nuevoLibro) {
+    public boolean actualizarAmigo(String nombre, long telefono, String correo, Amigo nuevoAmigo) {
+        if (nuevoAmigo == null) {
+            throw new IllegalArgumentException("El nuevo amigo no puede ser nulo.");
+        }
         for (int i = 0; i < amigos.size(); i++) {
-            if (amigos.get(i).getNombre() == nombre && amigos.get(i).getTelefono() == telefono && amigos.get(i).getCorreo() == correo) {
-                amigos.set(i, nuevoLibro);
+            Amigo amigo = amigos.get(i);
+            if (amigo.getNombre().equals(nombre) && amigo.getTelefono() == telefono && amigo.getCorreo().equals(correo)) {
+                amigos.set(i, nuevoAmigo);
                 return true;
             }
         }
+        
         return false;
     }
     /**

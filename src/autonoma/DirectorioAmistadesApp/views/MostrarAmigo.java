@@ -4,16 +4,10 @@
  */
 package autonoma.DirectorioAmistadesApp.views;
 
-import autonoma.DirectorioAmistadesApp.exceptions.AmigoDuplicadoException;
-import autonoma.DirectorioAmistadesApp.exceptions.CaracteresEspecialesException;
-import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
-import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
-import autonoma.DirectorioAmistadesApp.exceptions.FormatoInvalidoException;
-import autonoma.DirectorioAmistadesApp.exceptions.FormatoNumeroInvalidoException;
-import autonoma.DirectorioAmistadesApp.exceptions.NumeroTelefonoNegativoException;
-import autonoma.DirectorioAmistadesApp.exceptions.TelefonoInvalidoException;
+
 import autonoma.DirectorioAmistadesApp.models.Amigo;
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
+import java.awt.Frame;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -32,7 +26,6 @@ public class MostrarAmigo extends javax.swing.JDialog {
     private Amigo amigo;
     private ArrayList<Amigo> amigos;
     private VentanaPrincipal ventana;
-    private JTable tabla;
     /**
      * Creates new form MostrarAmigo
      */
@@ -200,7 +193,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
         int fila = this.tablaAmigos.getSelectedRow();
         if(fila >= 0){
             Amigo amigo = this.amigos.get(fila);
-            ActualizarAmigo ventanaActualizar = new ActualizarAmigo(this.ventana, true, directorio, this, amigo);
+            ActualizarAmigo ventanaActualizar = new ActualizarAmigo(ventana, true, directorio, ventana, amigo);
             ventanaActualizar.setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Por favor, seleccione el libro que desea actualizar");
