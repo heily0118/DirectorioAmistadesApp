@@ -58,6 +58,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         btnMostrarAmigos = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        btnMostrarInformacionDesarrollador = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JToggleButton();
@@ -199,6 +201,36 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnMostrarInformacionDesarrollador.setBackground(new java.awt.Color(255, 255, 255));
+        btnMostrarInformacionDesarrollador.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnMostrarInformacionDesarrolladorMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMostrarInformacionDesarrolladorMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMostrarInformacionDesarrolladorMouseExited(evt);
+            }
+        });
+
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/informacionDesarrolladores.png"))); // NOI18N
+
+        javax.swing.GroupLayout btnMostrarInformacionDesarrolladorLayout = new javax.swing.GroupLayout(btnMostrarInformacionDesarrollador);
+        btnMostrarInformacionDesarrollador.setLayout(btnMostrarInformacionDesarrolladorLayout);
+        btnMostrarInformacionDesarrolladorLayout.setHorizontalGroup(
+            btnMostrarInformacionDesarrolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(btnMostrarInformacionDesarrolladorLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        btnMostrarInformacionDesarrolladorLayout.setVerticalGroup(
+            btnMostrarInformacionDesarrolladorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -211,11 +243,20 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addComponent(btnMostrarAmigos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(60, 60, 60))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnMostrarInformacionDesarrollador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addGap(104, 104, 104)
+=======
+                .addContainerGap()
+                .addComponent(btnMostrarInformacionDesarrollador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(63, 63, 63)
+>>>>>>> f9d01d6 (Se agregaron cambios en el código)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(btnMostrarAmigos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -277,8 +318,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel7)
                 .addGap(128, 128, 128))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+<<<<<<< HEAD
                 .addComponent(btnMostrarInformacionDesarrollador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+=======
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+>>>>>>> f9d01d6 (Se agregaron cambios en el código)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16))
         );
@@ -361,8 +406,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnMostrarAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarAmigosMouseClicked
-      MostrarAmigo ventanaMostrar = new MostrarAmigo(this, true,directorio);
-      ventanaMostrar.setVisible(true);
+        MostrarAmigo ventanaMostrar = new MostrarAmigo(this, true,directorio);
+        ventanaMostrar.setVisible(true);
     }//GEN-LAST:event_btnMostrarAmigosMouseClicked
 
     private void btnMostrarAmigosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarAmigosMouseEntered
@@ -372,7 +417,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnMostrarAmigosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarAmigosMouseExited
         this.mouseExited(btnMostrarAmigos);
     }//GEN-LAST:event_btnMostrarAmigosMouseExited
- private void mouseEntered(JPanel panel){
+    private void mouseEntered(JPanel panel){
         panel.setBackground(new Color(200,255,255));
         
     }

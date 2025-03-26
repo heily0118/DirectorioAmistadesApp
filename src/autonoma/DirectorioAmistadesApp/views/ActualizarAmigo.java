@@ -8,7 +8,6 @@ import autonoma.DirectorioAmistadesApp.exceptions.CaracteresEspecialesException;
 import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
 import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
 import autonoma.DirectorioAmistadesApp.exceptions.FormatoInvalidoException;
-import autonoma.DirectorioAmistadesApp.exceptions.FormatoNumeroInvalidoException;
 import autonoma.DirectorioAmistadesApp.exceptions.NumeroTelefonoNegativoException;
 import autonoma.DirectorioAmistadesApp.exceptions.TelefonoInvalidoException;
 import autonoma.DirectorioAmistadesApp.models.Amigo;
@@ -39,6 +38,7 @@ public class ActualizarAmigo extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.directorio = directorio;
         this.amigo = amigo;
+        this.ventana = ventana;
         
         try { 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/directorioAmistad.png")).getImage());
@@ -317,7 +317,7 @@ public class ActualizarAmigo extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(this, "Error: No se pudo actualizar el amigo.");
             }
-        } catch (FormatoNumeroInvalidoException e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
         } catch (DatosObligatoriosException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());

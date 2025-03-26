@@ -228,6 +228,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+
     int filaSeleccionada = tablaAmigos.getSelectedRow();
     
     if (filaSeleccionada != -1) { 
@@ -255,13 +256,39 @@ public class MostrarAmigo extends javax.swing.JDialog {
     } else {
         JOptionPane.showMessageDialog(this, "Seleccione un contacto para eliminar.", "Aviso", JOptionPane.WARNING_MESSAGE);
     }
+
+    
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Por favor, selecciona un amigo de la tabla.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+   
+        String correoAmigo = tablaAmigos.getValueAt(filaSeleccionada, 1).toString();
+
+   
+        try {
+            Amigo amigoExistente = directorio.buscarAmigo(correoAmigo);  
+
+            int confirmacion = JOptionPane.showConfirmDialog(this, "¿Estás seguro de que deseas eliminar este amigo?", "Confirmación", JOptionPane.YES_NO_OPTION);
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                if (directorio.eliminarAmigo(correoAmigo)) {  
+                    JOptionPane.showMessageDialog(this, "Amigo eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    llenarTabla(directorio.getAmigos());
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo eliminar el amigo.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        } catch (AmigoNoEncontradoException e) {
+            JOptionPane.showMessageDialog(this, "No se encontró el amigo en el directorio.", "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_btnEliminarActionPerformed
-   public void llenarTabla(ArrayList<Amigo> amigos) {
+    public void llenarTabla(ArrayList<Amigo> amigos) {
     
-    DefaultTableModel modelo = new DefaultTableModel(new String[]{"Nombre", "Teléfono", "Correo Electrónico"}, 0);
+        DefaultTableModel modelo = new DefaultTableModel(new String[]{"Nombre", "Teléfono", "Correo Electrónico"}, 0);
     
-    for (Amigo amigo : amigos) {
-        modelo.addRow(new Object[]{
+        for (Amigo amigo : amigos) {
+            modelo.addRow(new Object[]{
             amigo.getNombre(),
             amigo.getTelefono(),
             amigo.getCorreo()

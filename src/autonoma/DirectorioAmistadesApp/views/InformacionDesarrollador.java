@@ -28,10 +28,10 @@ public class InformacionDesarrollador extends javax.swing.JDialog {
         informacionDesarrolladores.setText(directorio.mostrarInformacionAplicacion());
         informacionDesarrolladores.setEditable(false);
         
-        try{ 
-        this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/directorioAmistad.png")).getImage());
+        try { 
+            this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/directorioAmistad.png")).getImage());
         
-        }catch(NullPointerException e){
+        } catch(NullPointerException e){
             System.out.println("Imagen no encontrada");
             
         }
