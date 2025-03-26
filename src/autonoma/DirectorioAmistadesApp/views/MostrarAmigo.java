@@ -281,12 +281,12 @@ public class MostrarAmigo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "No se encontró el amigo en el directorio.", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btnEliminarActionPerformed
-   public void llenarTabla(ArrayList<Amigo> amigos) {
+    public void llenarTabla(ArrayList<Amigo> amigos) {
     
-    DefaultTableModel modelo = new DefaultTableModel(new String[]{"Nombre", "Teléfono", "Correo Electrónico"}, 0);
+        DefaultTableModel modelo = new DefaultTableModel(new String[]{"Nombre", "Teléfono", "Correo Electrónico"}, 0);
     
-    for (Amigo amigo : amigos) {
-        modelo.addRow(new Object[]{
+        for (Amigo amigo : amigos) {
+            modelo.addRow(new Object[]{
             amigo.getNombre(),
             amigo.getTelefono(),
             amigo.getCorreo()

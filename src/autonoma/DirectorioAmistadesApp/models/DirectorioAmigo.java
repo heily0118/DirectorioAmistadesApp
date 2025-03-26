@@ -20,6 +20,9 @@ public class DirectorioAmigo {
      */
     private  ArrayList<Amigo> amigos;
     
+    /**
+     * Constructor para crear un objeto vacío
+     */
     public DirectorioAmigo() {
        this.amigos = new ArrayList<>();
     }

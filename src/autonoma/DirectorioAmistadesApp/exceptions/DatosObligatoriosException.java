@@ -12,7 +12,7 @@ public class DatosObligatoriosException extends Exception{
     
     public DatosObligatoriosException(){
 
-        super("Debe ingresar todos los campos!Es obligatorio.");
+        super("Debe ingresar todos los campos! Es obligatorio.");
 
 
     }

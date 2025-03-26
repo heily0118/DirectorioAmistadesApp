@@ -13,16 +13,10 @@ import autonoma.DirectorioAmistadesApp.views.VentanaPrincipal;
  */
 public class DirectorioAmistadesApp {
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
         
         DirectorioAmigo directorioAmigo = new DirectorioAmigo();
-        
-       
-
         
         VentanaPrincipal ventana = new VentanaPrincipal(directorioAmigo);
         ventana.setVisible(true);
