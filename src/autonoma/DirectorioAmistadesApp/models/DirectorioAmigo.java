@@ -72,7 +72,15 @@ public class DirectorioAmigo {
         }
       return null;
     }
-
+    
+    /**
+     * Actualiza a un amigo.
+     * @param nombre El nombre del nuevo amigo a actualizar.
+     * @param telefono El teléfono del nuevo amigo a actualizar.
+     * @param correo El correo de la nuevo amigo a actualizar.
+     * @param nuevoAmigo Se crea un objeto de tipo Amigo para almacenar el nuevo amigo.
+     * @return Retorna true si se puedo actualizar el amigo y false si no se encuentra el amigo.
+     */
     public boolean actualizarAmigo(String nombre, long telefono, String correo, Amigo nuevoAmigo){
         for (int i = 0; i < amigos.size(); i++) {
             Amigo amigo = amigos.get(i);
@@ -83,19 +91,30 @@ public class DirectorioAmigo {
         }
         return false;
     }
-    public boolean eliminarAmigo(String correoElectronico) {
-    for (int i = 0; i < amigos.size(); i++) {
-        if (amigos.get(i).getCorreo().equalsIgnoreCase(correoElectronico)) {
-            amigos.remove(i);
-            return true;
-        }
-    }
-    return false;
-   }
     
+    /**
+     * Elimina un amigo de la lista según su correo electrónico.
+     * @param correoElectronico El correo electónico del amigo a eliminar.
+     * @return Retorna true si el amigo fue eliminado y false si no se encontró el amigo en la lista.
+     */
+    public boolean eliminarAmigo(String correoElectronico) {
+        for (int i = 0; i < amigos.size(); i++) {
+            if (amigos.get(i).getCorreo().equalsIgnoreCase(correoElectronico)) {
+                amigos.remove(i);
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * Obtiene una copia de la lista de todos los amigos almacenados.
+     * @return Retorna una nueva lista que contiene todos los amigos.
+     */
     public ArrayList<Amigo> obtenerTodosLosAmigos() {
        return new ArrayList<>(amigos);
     }
+    
     /**
      * Proporciona información sobre la aplicación, incluyendo los nombres de los desarrolladores,
      * la universidad y la asignatura en la que se desarrolló.

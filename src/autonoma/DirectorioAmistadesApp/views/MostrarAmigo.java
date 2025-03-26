@@ -4,16 +4,7 @@
  */
 package autonoma.DirectorioAmistadesApp.views;
 
-import autonoma.DirectorioAmistadesApp.exceptions.AmigoDuplicadoException;
 import autonoma.DirectorioAmistadesApp.exceptions.AmigoNoEncontradoException;
-import autonoma.DirectorioAmistadesApp.exceptions.CaracteresEspecialesException;
-import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
-import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
-import autonoma.DirectorioAmistadesApp.exceptions.FormatoInvalidoException;
-import autonoma.DirectorioAmistadesApp.exceptions.FormatoNumeroInvalidoException;
-import autonoma.DirectorioAmistadesApp.exceptions.NumeroTelefonoNegativoException;
-import autonoma.DirectorioAmistadesApp.exceptions.TelefonoInvalidoException;
-
 import autonoma.DirectorioAmistadesApp.models.Amigo;
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import java.awt.Frame;
@@ -28,7 +19,7 @@ import javax.swing.table.TableModel;
 
 /**
  *
- * @author Maria Paz Puerta
+ * @author Maria Paz Puerta <mariap.puertaa@autonoma.edu.co>
  */
 public class MostrarAmigo extends javax.swing.JDialog {
     private DirectorioAmigo directorio;
@@ -135,12 +126,11 @@ public class MostrarAmigo extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnActualizar)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(btnEliminar)
-                        .addComponent(btnCancelar)))
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEliminar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(16, 16, 16))
         );
         jPanel2Layout.setVerticalGroup(
@@ -148,11 +138,11 @@ public class MostrarAmigo extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(67, 67, 67)
                 .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addGap(32, 32, 32)
                 .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(34, 34, 34)
                 .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(81, 81, 81))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(14, Short.MAX_VALUE)
                 .addComponent(tabla, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -221,7 +211,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
             ActualizarAmigo ventanaActualizar = new ActualizarAmigo(ventana, true, directorio, ventana, amigo);
             ventanaActualizar.setVisible(true);
         } else {
-            JOptionPane.showMessageDialog(this, "Por favor, seleccione el libro que desea actualizar");
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione el amigo que desea actualizar");
         }
         
     }//GEN-LAST:event_btnActualizarActionPerformed

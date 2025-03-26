@@ -21,7 +21,7 @@ import javax.swing.table.TableModel;
 
 /**
  *
- * @author Maria Paz Puerta
+ * @author Maria Paz Puerta <mariap.puertaa@autonoma.edu.co>
  */
 public class ActualizarAmigo extends javax.swing.JDialog {
     private DirectorioAmigo directorio;
@@ -163,11 +163,11 @@ public class ActualizarAmigo extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtNuevoNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addGap(18, 30, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(txtNuevoTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(37, 37, 37)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtNuevoCorreoElectronico, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -306,13 +306,14 @@ public class ActualizarAmigo extends javax.swing.JDialog {
             }
 
             Amigo amigo = new Amigo(nuevoNombre, telefono, nuevoCorreoElectronico);
+            boolean actualizado = this.directorio.actualizarAmigo(this.amigo.getNombre(), this.amigo.getTelefono(), this.amigo.getCorreo(),
+            new Amigo(nuevoNombre, telefono, nuevoCorreoElectronico));
 
-            if (this.directorio.agregarAmigo(nuevoNombre, telefono, nuevoCorreoElectronico, amigo)) {
-                JOptionPane.showMessageDialog(this, "El amigo " + nuevoNombre + " ha sido agregado exitosamente");
+            if (actualizado) {
+                JOptionPane.showMessageDialog(this, "El amigo " + nuevoNombre + " ha sido actualizado exitosamente");
                 this.dispose();
             } else {
-                JOptionPane.showMessageDialog(this, "Ha ocurrido un error, no se ha podido agregar un amigo");
-                this.dispose();
+                JOptionPane.showMessageDialog(this, "Error: No se pudo actualizar el amigo.");
             }
         } catch (FormatoNumeroInvalidoException e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
@@ -331,15 +332,6 @@ public class ActualizarAmigo extends javax.swing.JDialog {
         } catch (FormatoInvalidoException e){
             JOptionPane.showMessageDialog(this, e.getMessage());
         }
-        long telefono = Long.parseLong(nuevoTelefono);
-        String nombre = this.txtNuevoNombre.getText();
-            
-        this.directorio.actualizarAmigo(this.amigo.getNombre(), this.amigo.getTelefono(), this.amigo.getCorreo(), new Amigo(nombre, telefono, this.amigo.getCorreo()));
-
-        JOptionPane.showMessageDialog(this, "El amigo " + nombre + " ha sido actualizado exitosamente");
-
-        this.ventana.llenarTabla();
-            
         this.dispose();
     }//GEN-LAST:event_btnActualizarActionPerformed
 
