@@ -47,7 +47,8 @@ public class MostrarAmigo extends javax.swing.JDialog {
         this.directorio = directorio;
         this.amigo = amigo;
         this.ventana = ventana;
-        this.llenarTabla();
+        this.amigos = directorio.getAmigos(); 
+        this.llenarTabla(this.amigos);
         
         try { 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/directorioAmistad.png")).getImage());
@@ -252,7 +253,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
         if (confirmacion == JOptionPane.YES_OPTION) {
             if (directorio.eliminarAmigo(correoAmigo)) {  
                 JOptionPane.showMessageDialog(this, "Amigo eliminado correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                actualizarTabla(directorio.getAmigos());  
+               llenarTabla(directorio.getAmigos());
             } else {
                 JOptionPane.showMessageDialog(this, "No se pudo eliminar el amigo.", "Error", JOptionPane.ERROR_MESSAGE);
             }
@@ -261,21 +262,20 @@ public class MostrarAmigo extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(this, "No se encontró el amigo en el directorio.", "Error", JOptionPane.ERROR_MESSAGE);
     }
     }//GEN-LAST:event_btnEliminarActionPerformed
-    public void llenarTabla() {
-    // 1. Modificar el modelo de la tabla para que tenga las columnas correctas
-        DefaultTableModel modelDefault = new DefaultTableModel(new String[]{"Nombre", "Telefono", "Correo Electronico"}, this.amigos.size());
-        this.tablaAmigos.setModel(modelDefault);
+   public void llenarTabla(ArrayList<Amigo> amigos) {
+    DefaultTableModel modelDefault = new DefaultTableModel(new String[]{"Nombre", "Teléfono", "Correo Electrónico"}, amigos.size());
+    this.tablaAmigos.setModel(modelDefault);
 
-        TableModel dataModel = tablaAmigos.getModel();
+    TableModel dataModel = tablaAmigos.getModel();
 
-    // 2. Llenar la tabla con los datos de los libros
-        for (int i = 0; i < this.amigos.size(); i++) {
-            Amigo amigo = this.amigos.get(i);
-            dataModel.setValueAt(amigo.getNombre(), i, 0);       
-            dataModel.setValueAt(amigo.getTelefono(), i, 1);    
-            dataModel.setValueAt(amigo.getCorreo(), i, 2);
-        }      
+    for (int i = 0; i < amigos.size(); i++) {
+        Amigo amigo = amigos.get(i);
+        dataModel.setValueAt(amigo.getNombre(), i, 0);
+        dataModel.setValueAt(amigo.getTelefono(), i, 1);
+        dataModel.setValueAt(amigo.getCorreo(), i, 2);
     }
+}
+
  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
