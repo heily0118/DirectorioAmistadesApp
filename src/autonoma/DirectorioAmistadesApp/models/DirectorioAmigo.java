@@ -56,13 +56,13 @@ public class DirectorioAmigo {
      * @param telefonoStr El número de teléfono del amigo a validar.
      * @param correoElectronico El correo electrónico del amigo a validar.
      * @return Retorna true si los datos son válidos.
-     * @throws DatosObligatoriosException Se llama a esta excepción si algún campo está vacío.
-     * @throws TelefonoInvalidoException Se llama a esta excepción si el teléfono no comienza con "606" o "30".
-     * @throws CorreoInvalidoException Se llama a esta excepción si el correo electrónico no contiene "@". 
+     * @throws DatosObligatoriosException Se lanza a esta excepción si algún campo está vacío.
+     * @throws TelefonoInvalidoException Se lanza a esta excepción si el teléfono no comienza con "606" o "30".
+     * @throws CorreoInvalidoException Se lanza a esta excepción si el correo electrónico no contiene "@". 
      * @throws NumeroTelefonoNegativoException Se llama a esta excepción si el número de teléfono no es un número válido o es negativo.
-     * @throws AmigoDuplicadoException Se llama a esta excepxión si el correo ya se encuentra registrado.
-     * @throws CaracteresEspecialesException Se llama a esta excepción si el nombre, teléfono o correo electrónco contienen caracteres especiales.
-     * @throws FormatoInvalidoException Se llama a esta excepción si el nombre contiene números.
+     * @throws AmigoDuplicadoException Se lanza a esta excepxión si el correo ya se encuentra registrado.
+     * @throws CaracteresEspecialesException Se lanza a esta excepción si el nombre, teléfono o correo electrónco contienen caracteres especiales.
+     * @throws FormatoInvalidoException Se lanza a esta excepción si el nombre contiene números.
      */
     public boolean validarAmigo(String nombre, String telefonoStr, String correoElectronico) throws 
         DatosObligatoriosException, TelefonoInvalidoException, CorreoInvalidoException, NumeroTelefonoNegativoException,
@@ -146,19 +146,19 @@ public class DirectorioAmigo {
      * @param nombre El nombre del nuevo amigo a actualizar.
      * @param telefono El teléfono del nuevo amigo a actualizar.
      * @param correo El correo de la nuevo amigo a actualizar.
-     * @param nuevoAmigo Se crea un objeto de tipo Amigo para almacenar el nuevo amigo.
+     * @param datosNuevos Se crea un objeto de tipo Amigo para almacenar los datos nuevos del amigo.
      * @return Retorna true si se puedo actualizar el amigo y false si no se encuentra el amigo.
      */
     public boolean actualizarAmigo(String nombre, long telefono, String correo, Amigo datosNuevos) throws AmigoNoEncontradoException {
-    Amigo amigo = obtenerAmigo(nombre, telefono, correo); // Lanza excepción si no lo encuentra
-    if (amigo == null) {
-        throw new AmigoNoEncontradoException();
+        Amigo amigo = obtenerAmigo(nombre, telefono, correo); // Lanza excepción si no lo encuentra
+        if (amigo == null) {
+            throw new AmigoNoEncontradoException();
+        }
+        amigo.setNombre(datosNuevos.getNombre());
+        amigo.setTelefono(datosNuevos.getTelefono());
+        amigo.setCorreo(datosNuevos.getCorreo());
+        return true;
     }
-    amigo.setNombre(datosNuevos.getNombre());
-    amigo.setTelefono(datosNuevos.getTelefono());
-    amigo.setCorreo(datosNuevos.getCorreo());
-    return true;
-}
     
     /**
      * Elimina un amigo de la lista según su correo electrónico.
@@ -166,18 +166,24 @@ public class DirectorioAmigo {
      * @return Retorna true si el amigo fue eliminado y false si no se encontró el amigo en la lista.
      */
     public boolean eliminarAmigo(String correoElectronico) throws AmigoNoEncontradoException {
-    Amigo amigo = obtenerAmigoPorCorreo(correoElectronico); 
-    return amigos.remove(amigo); 
-}
-    
-    public Amigo obtenerAmigoPorCorreo(String correoElectronico) throws AmigoNoEncontradoException {
-    for (Amigo amigo : amigos) {
-        if (amigo.getCorreo().equalsIgnoreCase(correoElectronico)) {
-            return amigo;
-        }
+        Amigo amigo = obtenerAmigoPorCorreo(correoElectronico); 
+        return amigos.remove(amigo); 
     }
-    throw new AmigoNoEncontradoException();
-}
+    
+    /**
+     * Busca y obtiene un amigo del directorio según su correo electrónico.
+     * @param correoElectronico
+     * @return El objeto de tipo Amigo si se encuentra en la lista amigos.
+     * @throws AmigoNoEncontradoException Se lanza a esta excepción si no se encuentra un amigo con el correo electrónico registrado.
+     */
+    public Amigo obtenerAmigoPorCorreo(String correoElectronico) throws AmigoNoEncontradoException {
+        for (Amigo amigo : amigos) {
+            if (amigo.getCorreo().equalsIgnoreCase(correoElectronico)) {
+                return amigo;
+            }
+        }
+        throw new AmigoNoEncontradoException();
+    }
     
     /**
      * Obtiene una copia de la lista de todos los amigos almacenados.
