@@ -112,8 +112,8 @@ public class DirectorioAmigo {
 }
 
     public boolean agregarAmigo(String nombre, long telefono, String correoElectronico, Amigo amigo){
-         Amigo nuevoAmigo = new Amigo(nombre, telefono, correoElectronico);
-    return amigos.add(nuevoAmigo);
+        Amigo nuevoAmigo = new Amigo(nombre, telefono, correoElectronico);
+        return amigos.add(nuevoAmigo);
     }
     
     /**
