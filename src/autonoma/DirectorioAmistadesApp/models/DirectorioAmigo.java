@@ -61,60 +61,59 @@ public class DirectorioAmigo {
         DatosObligatoriosException, TelefonoInvalidoException, CorreoInvalidoException, NumeroTelefonoNegativoException,
         AmigoDuplicadoException, CaracteresEspecialesException, FormatoInvalidoException {
     
-    if (nombre.isEmpty() || telefonoStr.isEmpty() || correoElectronico.isEmpty()) {
-        throw new DatosObligatoriosException();
-    }
-    
-    long telefono;
-    try {
-        telefono = Long.parseLong(telefonoStr);
-    } catch (NumberFormatException e) {
-        throw new NumeroTelefonoNegativoException();
-    }
-    
-    if (telefono < 0) {
-        throw new NumeroTelefonoNegativoException();
-    }
-    
-    if (!telefonoStr.startsWith("606") && !telefonoStr.startsWith("30")) {
-        throw new TelefonoInvalidoException();
-    }
-    
-    if (!correoElectronico.contains("@")) {
-        throw new CorreoInvalidoException();
-    }
-    
-    boolean tieneLetras = false;
-    boolean tieneNumeros = false;
-    for (char c : nombre.toCharArray()) {
-        if (Character.isLetter(c)) {
-            tieneLetras = true;
-        } else if (Character.isDigit(c)) {
-            tieneNumeros = true;
-            throw new FormatoInvalidoException();
+        if (nombre.isEmpty() || telefonoStr.isEmpty() || correoElectronico.isEmpty()) {
+            throw new DatosObligatoriosException();
         }
-    }
     
-    for (Amigo a : this.amigos) {
-        if (a.getCorreo().equals(correoElectronico)) {
-            throw new AmigoDuplicadoException();
+        long telefono;
+        try {
+            telefono = Long.parseLong(telefonoStr);
+        } catch (NumberFormatException e) {
+            throw new NumeroTelefonoNegativoException();
         }
-    }
     
-    String caracteresProhibidos = "!#$%^&*()_=+\\|{};,:/?>";
-    for (char c : (nombre + telefonoStr + correoElectronico).toCharArray()) {
-        if (caracteresProhibidos.contains(String.valueOf(c))) {
-            throw new CaracteresEspecialesException();
+        if (telefono < 0) {
+            throw new NumeroTelefonoNegativoException();
         }
-    }
     
-    return true;
-}
+        if (!telefonoStr.startsWith("606") && !telefonoStr.startsWith("30")) {
+            throw new TelefonoInvalidoException();
+        }
+    
+        if (!correoElectronico.contains("@")) {
+            throw new CorreoInvalidoException();
+        }
+    
+        boolean tieneLetras = false;
+        boolean tieneNumeros = false;
+        for (char c : nombre.toCharArray()) {
+            if (Character.isLetter(c)) {
+                tieneLetras = true;
+            } else if (Character.isDigit(c)) {
+                tieneNumeros = true;
+                throw new FormatoInvalidoException();
+            }
+        }
+    
+        for (Amigo a : this.amigos) {
+            if (a.getCorreo().equals(correoElectronico)) {
+                throw new AmigoDuplicadoException();
+            }
+        }
+    
+        String caracteresProhibidos = "!#$%^&*()_=+\\|{};,:/?>";
+        for (char c : (nombre + telefonoStr + correoElectronico).toCharArray()) {
+            if (caracteresProhibidos.contains(String.valueOf(c))) {
+                throw new CaracteresEspecialesException();
+            }
+        }
+        return true;
+    }
 
     public boolean agregarAmigo(String nombre, long telefono, String correoElectronico) {
-    Amigo nuevoAmigo = new Amigo(nombre, telefono, correoElectronico);
-    return amigos.add(nuevoAmigo);
-}
+        Amigo nuevoAmigo = new Amigo(nombre, telefono, correoElectronico);
+        return amigos.add(nuevoAmigo);
+    }
    
     /**
      * Busca a un amigo por medio de su correo electrónco en la lista.

@@ -242,12 +242,12 @@ public class AgregarAmigo extends javax.swing.JDialog {
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
        String nombre = this.txtNombre.getText();
-    String telefonoStr = txtTelefono.getText().trim();
-    String correoElectronico = this.txtCorreoElectronico.getText();
+       String telefonoStr = txtTelefono.getText().trim();
+       String correoElectronico = this.txtCorreoElectronico.getText();
 
-    try {
+        try {
         
-        if (directorio.validarAmigo(nombre, telefonoStr, correoElectronico)) {
+            if (directorio.validarAmigo(nombre, telefonoStr, correoElectronico)) {
             long telefono = Long.parseLong(telefonoStr);
 
            
@@ -257,14 +257,14 @@ public class AgregarAmigo extends javax.swing.JDialog {
             } else {
                 JOptionPane.showMessageDialog(this, "Ha ocurrido un error, no se ha podido agregar un amigo");
             }
-        }
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Número de teléfono no válido.");
-    } catch (DatosObligatoriosException | TelefonoInvalidoException | CorreoInvalidoException |
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Número de teléfono no válido.");
+        } catch (DatosObligatoriosException | TelefonoInvalidoException | CorreoInvalidoException |
              NumeroTelefonoNegativoException | AmigoDuplicadoException | CaracteresEspecialesException | 
              FormatoInvalidoException e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
-    }
+             JOptionPane.showMessageDialog(this, e.getMessage());
+        }
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
