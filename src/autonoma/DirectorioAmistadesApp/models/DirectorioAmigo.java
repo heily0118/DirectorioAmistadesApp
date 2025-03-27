@@ -118,7 +118,7 @@ public class DirectorioAmigo {
     }
 
     /**
-     * Agrega un nuevo amigo al directorio si su nombre no está registrado previamente.
+     * Agrega un nuevo amigo al directorio si su correo electrónico no está registrado previamente y si lo está no agrega al nuevoAmigo.
      * @param nombre El nombre de el amigo a agregar.
      * @param telefono El teléfono de el amigo a agregar.
      * @param correoElectronico El correo electrónico de el amigo a agregar.
