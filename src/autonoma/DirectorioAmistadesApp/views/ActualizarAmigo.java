@@ -3,6 +3,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package autonoma.DirectorioAmistadesApp.views;
+import autonoma.DirectorioAmistadesApp.exceptions.AmigoDuplicadoException;
+import autonoma.DirectorioAmistadesApp.exceptions.CaracteresEspecialesException;
+import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
+import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
+import autonoma.DirectorioAmistadesApp.exceptions.FormatoInvalidoException;
+import autonoma.DirectorioAmistadesApp.exceptions.NumeroTelefonoNegativoException;
+import autonoma.DirectorioAmistadesApp.exceptions.TelefonoInvalidoException;
 import autonoma.DirectorioAmistadesApp.models.Amigo;
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import java.util.ArrayList;
@@ -239,17 +246,26 @@ public class ActualizarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNuevoCorreoElectronicoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-    String nuevoNombre = this.txtNuevoNombre.getText();
-    String nuevoTelefono = txtNuevoTelefono.getText().trim();
-    String nuevoCorreoElectronico = this.txtNuevoCorreoElectronico.getText();
+    String nuevoNombre = this.txtNuevoNombre.getText().trim();
+    String nuevoTelefono = this.txtNuevoTelefono.getText().trim();
+    String nuevoCorreoElectronico = this.txtNuevoCorreoElectronico.getText().trim();
 
     try {
        
-        directorio.validarAmigo(nuevoNombre, nuevoTelefono, nuevoCorreoElectronico);
+        if (nuevoNombre.equals(amigo.getNombre()) && 
+            nuevoTelefono.equals(String.valueOf(amigo.getTelefono())) && 
+            nuevoCorreoElectronico.equals(amigo.getCorreo())) {
+            JOptionPane.showMessageDialog(this, "No hay cambios en los datos.");
+            this.dispose();
+            return; 
+        }
 
         
+        directorio.validarAmigo(nuevoNombre, nuevoTelefono, nuevoCorreoElectronico);
+
+      
         boolean actualizado = directorio.actualizarAmigo(
-            this.amigo.getNombre(), this.amigo.getTelefono(), this.amigo.getCorreo(),
+            amigo.getNombre(), amigo.getTelefono(), amigo.getCorreo(),
             new Amigo(nuevoNombre, Long.parseLong(nuevoTelefono), nuevoCorreoElectronico)
         );
 
@@ -259,8 +275,21 @@ public class ActualizarAmigo extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(this, "Error: No se pudo actualizar el amigo.");
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, e.getMessage());
+
+    } catch (DatosObligatoriosException e) {
+        JOptionPane.showMessageDialog(this, "Error: Todos los campos son obligatorios.");
+    } catch (NumeroTelefonoNegativoException e) {
+        JOptionPane.showMessageDialog(this, "Error: El número de teléfono no puede ser negativo.");
+    } catch (TelefonoInvalidoException e) {
+        JOptionPane.showMessageDialog(this, "Error: El número de teléfono debe comenzar con '606' o '30'.");
+    } catch (CorreoInvalidoException e) {
+        JOptionPane.showMessageDialog(this, "Error: Correo electrónico no válido.");
+    } catch (AmigoDuplicadoException e) {
+        JOptionPane.showMessageDialog(this, "Error: Ya existe un amigo con este correo.");
+    } catch (FormatoInvalidoException e) {
+        JOptionPane.showMessageDialog(this, "Error: El nombre no puede contener números.");
+    } catch (CaracteresEspecialesException e) {
+        JOptionPane.showMessageDialog(this, "Error: No se permiten caracteres especiales en los campos.");
     }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
