@@ -115,7 +115,7 @@ public class DirectorioAmigo {
     Amigo nuevoAmigo = new Amigo(nombre, telefono, correoElectronico);
     return amigos.add(nuevoAmigo);
 }
-    
+   
     /**
      * Busca a un amigo por medio de su correo electrónco en la lista.
      * @param correoElectronico El correo electrónico de el amigo que desea buscar.
