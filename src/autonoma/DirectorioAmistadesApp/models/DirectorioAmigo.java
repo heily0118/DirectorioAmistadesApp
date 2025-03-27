@@ -150,7 +150,7 @@ public class DirectorioAmigo {
      * @return Retorna true si se puedo actualizar el amigo y false si no se encuentra el amigo.
      */
     public boolean actualizarAmigo(String nombre, long telefono, String correo, Amigo datosNuevos) throws AmigoNoEncontradoException {
-    Amigo amigo = obtenerAmigo(nombre, telefono, correo); // Lanza excepción si no lo encuentra
+    Amigo amigo = obtenerAmigo(nombre, telefono, correo); 
     if (amigo == null) {
         throw new AmigoNoEncontradoException();
     }
