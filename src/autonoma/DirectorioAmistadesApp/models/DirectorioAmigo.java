@@ -4,7 +4,14 @@
  */
 package autonoma.DirectorioAmistadesApp.models;
 
+import autonoma.DirectorioAmistadesApp.exceptions.AmigoDuplicadoException;
 import autonoma.DirectorioAmistadesApp.exceptions.AmigoNoEncontradoException;
+import autonoma.DirectorioAmistadesApp.exceptions.CaracteresEspecialesException;
+import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
+import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
+import autonoma.DirectorioAmistadesApp.exceptions.FormatoInvalidoException;
+import autonoma.DirectorioAmistadesApp.exceptions.NumeroTelefonoNegativoException;
+import autonoma.DirectorioAmistadesApp.exceptions.TelefonoInvalidoException;
 import java.util.ArrayList;
 
 /**
@@ -50,15 +57,63 @@ public class DirectorioAmigo {
      * @param correoElectronico El correo electrónico de el amigo a agregar.
      * @return Retorna true si el amigo no existe en la lista y retorna false si ya existe un mismo nombre.
      */
-    public boolean agregarAmigo(String nombre, long telefono, String correoElectronico, Amigo amigo){
-        for (int i = 0; i < amigos.size(); i++) {
-            if (amigos.get(i).getNombre().equalsIgnoreCase(nombre)) {
-                return false;
-            }
+    public boolean validarAmigo(String nombre, String telefonoStr, String correoElectronico) throws 
+        DatosObligatoriosException, TelefonoInvalidoException, CorreoInvalidoException, NumeroTelefonoNegativoException,
+        AmigoDuplicadoException, CaracteresEspecialesException, FormatoInvalidoException {
+    
+    if (nombre.isEmpty() || telefonoStr.isEmpty() || correoElectronico.isEmpty()) {
+        throw new DatosObligatoriosException();
+    }
+    
+    long telefono;
+    try {
+        telefono = Long.parseLong(telefonoStr);
+    } catch (NumberFormatException e) {
+        throw new NumeroTelefonoNegativoException();
+    }
+    
+    if (telefono < 0) {
+        throw new NumeroTelefonoNegativoException();
+    }
+    
+    if (!telefonoStr.startsWith("606") && !telefonoStr.startsWith("30")) {
+        throw new TelefonoInvalidoException();
+    }
+    
+    if (!correoElectronico.contains("@")) {
+        throw new CorreoInvalidoException();
+    }
+    
+    boolean tieneLetras = false;
+    boolean tieneNumeros = false;
+    for (char c : nombre.toCharArray()) {
+        if (Character.isLetter(c)) {
+            tieneLetras = true;
+        } else if (Character.isDigit(c)) {
+            tieneNumeros = true;
+            throw new FormatoInvalidoException();
         }
-        Amigo nuevoAmigo = new Amigo(nombre, telefono, correoElectronico);
-        amigos.add(nuevoAmigo);
-        return true;
+    }
+    
+    for (Amigo a : this.amigos) {
+        if (a.getCorreo().equals(correoElectronico)) {
+            throw new AmigoDuplicadoException();
+        }
+    }
+    
+    String caracteresProhibidos = "!#$%^&*()_=+\\|{};,:/?>";
+    for (char c : (nombre + telefonoStr + correoElectronico).toCharArray()) {
+        if (caracteresProhibidos.contains(String.valueOf(c))) {
+            throw new CaracteresEspecialesException();
+        }
+    }
+    
+    return true;
+}
+
+    public boolean agregarAmigo(String nombre, long telefono, String correoElectronico, Amigo amigo){
+         Amigo nuevoAmigo = new Amigo(nombre, telefono, correoElectronico);
+    return amigos.add(nuevoAmigo);
     }
     
     /**
