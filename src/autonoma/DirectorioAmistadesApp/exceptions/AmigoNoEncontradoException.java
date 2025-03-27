@@ -11,7 +11,7 @@ package autonoma.DirectorioAmistadesApp.exceptions;
 public class AmigoNoEncontradoException extends Exception{
 
     public AmigoNoEncontradoException() {
-        super("El correo del amigo no se encontro en el directorio");
+        super("El amigo no se encontró en el directorio");
     }
     
     

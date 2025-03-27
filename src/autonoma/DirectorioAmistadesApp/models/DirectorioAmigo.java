@@ -182,17 +182,26 @@ public class DirectorioAmigo {
      * Obtiene una copia de la lista de todos los amigos almacenados.
      * @return Retorna una nueva lista que contiene todos los amigos.
      */
-   public ArrayList<Amigo> obtenerTodosLosAmigos() {
-    return amigos;
-}
-public Amigo obtenerAmigo(String nombre, long telefono, String correo) throws AmigoNoEncontradoException {
-    for (Amigo amigo : amigos) {
-        if (amigo.getNombre().equals(nombre) && amigo.getTelefono() == telefono && amigo.getCorreo().equals(correo)) {
-            return amigo; 
-        }
+    public ArrayList<Amigo> obtenerTodosLosAmigos() {
+        return amigos;
     }
-    throw new AmigoNoEncontradoException();
-}
+    
+    /**
+     * Busca y obtiene un amigo del directorio según su nombre, teléfono y correo electrónico.
+     * @param nombre El nombre del amigo a buscar.
+     * @param telefono El número de teléfono del amigo a buscar.
+     * @param correo El correo electrónico del amigo a buscar.
+     * @return Retorna el objeto de tipo Amigo amigo si se encuentra en la lista amigos.
+     * @throws AmigoNoEncontradoException Se llama a esta excepción si no se encuentra un amigo con el nombre, correo electrónico y teléfono registrado.
+     */
+    public Amigo obtenerAmigo(String nombre, long telefono, String correo) throws AmigoNoEncontradoException {
+        for (Amigo amigo : amigos) {
+            if (amigo.getNombre().equals(nombre) && amigo.getTelefono() == telefono && amigo.getCorreo().equals(correo)) {
+                return amigo; 
+            }
+        }
+        throw new AmigoNoEncontradoException();
+    }
     
     /**
      * Proporciona información sobre la aplicación, incluyendo los nombres de los desarrolladores,
