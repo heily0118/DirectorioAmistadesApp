@@ -51,11 +51,18 @@ public class DirectorioAmigo {
     }
     
     /**
-     * Agrega un nuevo amigo al directorio si su nombre no está registrado previamente.
-     * @param nombre El nombre de el amigo a agregar.
-     * @param telefono El teléfono de el amigo a agregar.
-     * @param correoElectronico El correo electrónico de el amigo a agregar.
-     * @return Retorna true si el amigo no existe en la lista y retorna false si ya existe un mismo nombre.
+     * Valida los datos de un amigo antes de agregarlo al directorio.
+     * @param nombre El nombre del amigo a validar.
+     * @param telefonoStr El número de teléfono del amigo a validar.
+     * @param correoElectronico El correo electrónico del amigo a validar.
+     * @return Retorna true si los datos son válidos.
+     * @throws DatosObligatoriosException Se llama a esta excepción si algún campo está vacío.
+     * @throws TelefonoInvalidoException Se llama a esta excepción si el teléfono no comienza con "606" o "30".
+     * @throws CorreoInvalidoException Se llama a esta excepción si el correo electrónico no contiene "@". 
+     * @throws NumeroTelefonoNegativoException Se llama a esta excepción si el número de teléfono no es un número válido o es negativo.
+     * @throws AmigoDuplicadoException Se llama a esta excepxión si el correo ya se encuentra registrado.
+     * @throws CaracteresEspecialesException Se llama a esta excepción si el nombre, teléfono o correo electrónco contienen caracteres especiales.
+     * @throws FormatoInvalidoException Se llama a esta excepción si el nombre contiene números.
      */
     public boolean validarAmigo(String nombre, String telefonoStr, String correoElectronico) throws 
         DatosObligatoriosException, TelefonoInvalidoException, CorreoInvalidoException, NumeroTelefonoNegativoException,
@@ -110,6 +117,13 @@ public class DirectorioAmigo {
         return true;
     }
 
+    /**
+     * Agrega un nuevo amigo al directorio si su nombre no está registrado previamente.
+     * @param nombre El nombre de el amigo a agregar.
+     * @param telefono El teléfono de el amigo a agregar.
+     * @param correoElectronico El correo electrónico de el amigo a agregar.
+     * @return Retorna true si el amigo fue agregado correctamente y retorna false si el amigo ya existia.
+     */
     public boolean agregarAmigo(String nombre, long telefono, String correoElectronico) {
         Amigo nuevoAmigo = new Amigo(nombre, telefono, correoElectronico);
         return amigos.add(nuevoAmigo);
@@ -156,13 +170,12 @@ public class DirectorioAmigo {
      */
     public boolean eliminarAmigo(String correoElectronico) throws AmigoNoEncontradoException {
         for (int i = 0; i < amigos.size(); i++) {
-        if (amigos.get(i).getCorreo().equalsIgnoreCase(correoElectronico)) {
-            amigos.remove(i);
-            return true;
+            if (amigos.get(i).getCorreo().equalsIgnoreCase(correoElectronico)) {
+                amigos.remove(i);
+                return true;
+            }
         }
-    }
-    throw new AmigoNoEncontradoException();
-
+        throw new AmigoNoEncontradoException();
     }
     
     /**
