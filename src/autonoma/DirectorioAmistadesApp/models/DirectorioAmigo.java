@@ -111,10 +111,10 @@ public class DirectorioAmigo {
     return true;
 }
 
-    public boolean agregarAmigo(String nombre, long telefono, String correoElectronico, Amigo amigo){
-         Amigo nuevoAmigo = new Amigo(nombre, telefono, correoElectronico);
+    public boolean agregarAmigo(String nombre, long telefono, String correoElectronico) {
+    Amigo nuevoAmigo = new Amigo(nombre, telefono, correoElectronico);
     return amigos.add(nuevoAmigo);
-    }
+}
     
     /**
      * Busca a un amigo por medio de su correo electrónco en la lista.
