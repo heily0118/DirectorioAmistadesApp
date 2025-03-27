@@ -69,49 +69,48 @@ public class DirectorioAmigo {
         AmigoDuplicadoException, CaracteresEspecialesException, FormatoInvalidoException {
     
         
-    if (nombre.isEmpty() || telefonoStr.isEmpty() || correoElectronico.isEmpty()) {
-        throw new DatosObligatoriosException();
-    }
-
-    long telefono;
-    try {
-        telefono = Long.parseLong(telefonoStr);
-    } catch (NumberFormatException e) {
-        throw new NumberFormatException("El teléfono debe ser un número válido."); 
-    }
-
-    if (telefono < 0) {
-        throw new NumeroTelefonoNegativoException();
-    }
-
-    if (!telefonoStr.startsWith("606") && !telefonoStr.startsWith("30")) {
-        throw new TelefonoInvalidoException();
-    }
-
-    if (!correoElectronico.contains("@")) {
-        throw new CorreoInvalidoException();
-    }
-
-    for (char c : nombre.toCharArray()) {
-        if (Character.isDigit(c)) {
-            throw new FormatoInvalidoException();
+        if (nombre.isEmpty() || telefonoStr.isEmpty() || correoElectronico.isEmpty()) {
+            throw new DatosObligatoriosException();
         }
-    }
 
-    for (Amigo a : this.amigos) {
-        if (a.getCorreo().equals(correoElectronico)) {
-            throw new AmigoDuplicadoException();
+        long telefono;
+        try {
+            telefono = Long.parseLong(telefonoStr);
+        } catch (NumberFormatException e) {
+            throw new NumberFormatException("El teléfono debe ser un número válido."); 
         }
-    }
 
-    String caracteresProhibidos = "!#$%^&*()_=+\\|{};,:/?>";
-    for (char c : (nombre + telefonoStr + correoElectronico).toCharArray()) {
-        if (caracteresProhibidos.contains(String.valueOf(c))) {
-            throw new CaracteresEspecialesException();
+        if (telefono < 0) {
+            throw new NumeroTelefonoNegativoException();
         }
-    }
 
-    return true;
+        if (!telefonoStr.startsWith("606") && !telefonoStr.startsWith("30")) {
+            throw new TelefonoInvalidoException();
+        }
+
+        if (!correoElectronico.contains("@")) {
+            throw new CorreoInvalidoException();
+        }
+
+        for (char c : nombre.toCharArray()) {
+            if (Character.isDigit(c)) {
+                throw new FormatoInvalidoException();
+            }
+        }
+
+        for (Amigo a : this.amigos) {
+            if (a.getCorreo().equals(correoElectronico)) {
+                throw new AmigoDuplicadoException();
+            }
+        }
+
+        String caracteresProhibidos = "!#$%^&*()_=+\\|{};,:/?>";
+        for (char c : (nombre + telefonoStr + correoElectronico).toCharArray()) {
+            if (caracteresProhibidos.contains(String.valueOf(c))) {
+                throw new CaracteresEspecialesException();
+            }
+        }
+        return true;
     }
 
     /**
