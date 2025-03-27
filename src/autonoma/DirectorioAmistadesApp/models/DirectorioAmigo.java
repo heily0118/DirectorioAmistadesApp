@@ -150,15 +150,14 @@ public class DirectorioAmigo {
      */
     public boolean actualizarAmigo(String nombre, long telefono, String correo, Amigo datosNuevos) throws AmigoNoEncontradoException {
 
-    Amigo amigo = obtenerAmigo(nombre, telefono, correo); 
-    if (amigo == null) {
-        throw new AmigoNoEncontradoException();
-
+        Amigo amigo = obtenerAmigo(nombre, telefono, correo); 
+        if (amigo == null) {
+            throw new AmigoNoEncontradoException();
+        }
         amigo.setNombre(datosNuevos.getNombre());
         amigo.setTelefono(datosNuevos.getTelefono());
         amigo.setCorreo(datosNuevos.getCorreo());
         return true;
-
     }
     
     /**
