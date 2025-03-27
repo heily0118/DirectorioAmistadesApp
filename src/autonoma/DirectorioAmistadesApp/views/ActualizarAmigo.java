@@ -4,6 +4,7 @@
  */
 package autonoma.DirectorioAmistadesApp.views;
 import autonoma.DirectorioAmistadesApp.exceptions.AmigoDuplicadoException;
+import autonoma.DirectorioAmistadesApp.exceptions.AmigoNoEncontradoException;
 import autonoma.DirectorioAmistadesApp.exceptions.CaracteresEspecialesException;
 import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
 import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
@@ -246,27 +247,42 @@ public class ActualizarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNuevoCorreoElectronicoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-    String nuevoNombre = this.txtNuevoNombre.getText().trim();
+     String nuevoNombre = this.txtNuevoNombre.getText().trim();
     String nuevoTelefono = this.txtNuevoTelefono.getText().trim();
     String nuevoCorreoElectronico = this.txtNuevoCorreoElectronico.getText().trim();
 
-    try {
-       
-        if (nuevoNombre.equals(amigo.getNombre()) && 
-            nuevoTelefono.equals(String.valueOf(amigo.getTelefono())) && 
-            nuevoCorreoElectronico.equals(amigo.getCorreo())) {
-            JOptionPane.showMessageDialog(this, "No hay cambios en los datos.");
-            this.dispose();
-            return; 
-        }
+   
+    if (amigo == null) {
+        JOptionPane.showMessageDialog(this, "Error: No se ha seleccionado un amigo.");
+        return;
+    }
 
+    
+    if (nuevoNombre.equals(amigo.getNombre()) &&
+        nuevoTelefono.equals(String.valueOf(amigo.getTelefono())) &&
+        nuevoCorreoElectronico.equals(amigo.getCorreo())) {
+        JOptionPane.showMessageDialog(this, "No hay cambios en los datos.");
+        this.dispose();
+        return; 
+    }
+
+  
+    long telefonoConvertido;
+    try {
+        telefonoConvertido = Long.parseLong(nuevoTelefono);
+    } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(this, "Error: El teléfono debe ser un número válido.");
+        return;
+    }
+
+    try {
         
         directorio.validarAmigo(nuevoNombre, nuevoTelefono, nuevoCorreoElectronico);
 
-      
+       
         boolean actualizado = directorio.actualizarAmigo(
             amigo.getNombre(), amigo.getTelefono(), amigo.getCorreo(),
-            new Amigo(nuevoNombre, Long.parseLong(nuevoTelefono), nuevoCorreoElectronico)
+            new Amigo(nuevoNombre, telefonoConvertido, nuevoCorreoElectronico)
         );
 
         if (actualizado) {
@@ -276,6 +292,8 @@ public class ActualizarAmigo extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(this, "Error: No se pudo actualizar el amigo.");
         }
 
+    } catch (AmigoNoEncontradoException e) {
+        JOptionPane.showMessageDialog(this, "Error: No se encontró el amigo para actualizar.");
     } catch (DatosObligatoriosException e) {
         JOptionPane.showMessageDialog(this, "Error: Todos los campos son obligatorios.");
     } catch (NumeroTelefonoNegativoException e) {
@@ -291,6 +309,7 @@ public class ActualizarAmigo extends javax.swing.JDialog {
     } catch (CaracteresEspecialesException e) {
         JOptionPane.showMessageDialog(this, "Error: No se permiten caracteres especiales en los campos.");
     }
+    
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
