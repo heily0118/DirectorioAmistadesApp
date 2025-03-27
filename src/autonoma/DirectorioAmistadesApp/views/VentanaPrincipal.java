@@ -18,6 +18,7 @@ import javax.swing.JPanel;
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
      private DirectorioAmigo directorio;
+     private Amigo amigo;
 
     /**
      * Creates new form VentanaPrincipal
@@ -28,6 +29,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         setResizable(false);
         this.setLocationRelativeTo(null);
         this.directorio = directorio;
+        
         
         
         try{ 
@@ -349,8 +351,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarAmigoMouseExited
 
     private void btnAgregarAmigoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarAmigoMouseClicked
-       Amigo amigo = null;
-       AgregarAmigo ventanaAgregar = new AgregarAmigo(this, true,directorio, this, amigo);
+      AgregarAmigo ventanaAgregar = new AgregarAmigo(this, true, directorio);
        ventanaAgregar.setVisible(true);
     }//GEN-LAST:event_btnAgregarAmigoMouseClicked
 
@@ -359,7 +360,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnMostrarAmigosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMostrarAmigosMouseClicked
-        MostrarAmigo ventanaMostrar = new MostrarAmigo(this, true,directorio);
+        MostrarAmigo ventanaMostrar = new MostrarAmigo(this, true,directorio,amigo);
         ventanaMostrar.setVisible(true);
     }//GEN-LAST:event_btnMostrarAmigosMouseClicked
 

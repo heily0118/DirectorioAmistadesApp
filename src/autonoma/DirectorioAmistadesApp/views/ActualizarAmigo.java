@@ -3,21 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package autonoma.DirectorioAmistadesApp.views;
-import autonoma.DirectorioAmistadesApp.exceptions.AmigoDuplicadoException;
-import autonoma.DirectorioAmistadesApp.exceptions.CaracteresEspecialesException;
-import autonoma.DirectorioAmistadesApp.exceptions.CorreoInvalidoException;
-import autonoma.DirectorioAmistadesApp.exceptions.DatosObligatoriosException;
-import autonoma.DirectorioAmistadesApp.exceptions.FormatoInvalidoException;
-import autonoma.DirectorioAmistadesApp.exceptions.NumeroTelefonoNegativoException;
-import autonoma.DirectorioAmistadesApp.exceptions.TelefonoInvalidoException;
 import autonoma.DirectorioAmistadesApp.models.Amigo;
 import autonoma.DirectorioAmistadesApp.models.DirectorioAmigo;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
-
 /**
  *
  * @author Maria Paz Puerta <mariap.puertaa@autonoma.edu.co>
@@ -26,11 +16,11 @@ public class ActualizarAmigo extends javax.swing.JDialog {
     private DirectorioAmigo directorio;
     private Amigo amigo;
     private ArrayList<Amigo> amigos;
-    private VentanaPrincipal ventana;
+    
     /**
      * Creates new form ActualizarAmigo
      */
-    public ActualizarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio, VentanaPrincipal ventana, Amigo amigo) {
+    public ActualizarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio,Amigo amigo) {
         super(parent, modal);
         initComponents();
         setSize(650, 500);
@@ -38,7 +28,8 @@ public class ActualizarAmigo extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.directorio = directorio;
         this.amigo = amigo;
-        this.ventana = ventana;
+        
+      
         
         try { 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/directorioAmistad.png")).getImage());
@@ -248,93 +239,29 @@ public class ActualizarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNuevoCorreoElectronicoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-        String nuevoNombre = this.txtNuevoNombre.getText();
-        String nuevoTelefono = txtNuevoTelefono.getText().trim();
-        String nuevoCorreoElectronico = this.txtNuevoCorreoElectronico.getText();
+    String nuevoNombre = this.txtNuevoNombre.getText();
+    String nuevoTelefono = txtNuevoTelefono.getText().trim();
+    String nuevoCorreoElectronico = this.txtNuevoCorreoElectronico.getText();
 
-        try {
-            if (nuevoNombre.isEmpty() || nuevoTelefono.isEmpty() || nuevoCorreoElectronico.isEmpty()) {
-                throw new DatosObligatoriosException();
-            }
-            long telefono = Long.parseLong(nuevoTelefono);
-            if (telefono < 0){
-                throw new NumeroTelefonoNegativoException();
-            }
-            if (!nuevoTelefono.startsWith("606") && !nuevoTelefono.startsWith("30")) {
-                throw new TelefonoInvalidoException();
-            }
-            if (!nuevoCorreoElectronico.contains("@")){
-                throw new CorreoInvalidoException();
-            }
+    try {
+       
+        directorio.validarAmigo(nuevoNombre, nuevoTelefono, nuevoCorreoElectronico);
 
-            boolean tieneLetras = false;
-            boolean tieneNumeros = false;
-            for (int i = 0; i < nuevoNombre.length(); i++) {
-                char c = nuevoNombre.charAt(i);
-                if (Character.isLetter(c)) {
-                    tieneLetras = true;
-                } else if (Character.isDigit(c)) {
-                    tieneNumeros = true;
-                    throw new FormatoInvalidoException();
-                }
-            }
+        
+        boolean actualizado = directorio.actualizarAmigo(
+            this.amigo.getNombre(), this.amigo.getTelefono(), this.amigo.getCorreo(),
+            new Amigo(nuevoNombre, Long.parseLong(nuevoTelefono), nuevoCorreoElectronico)
+        );
 
-            for (int i = 0; i < directorio.getAmigos().size(); i++) {
-                if (directorio.getAmigos().get(i).getCorreo().equals(nuevoCorreoElectronico)) {
-                    throw new AmigoDuplicadoException();
-                }
-            }
-
-            String caracteresProhibidos = "!#$%^&*()_=+\\|{};,:/?>";
-            for (int i = 0; i < nuevoNombre.length(); i++) {
-                char c = nuevoNombre.charAt(i);
-                if (caracteresProhibidos.contains(String.valueOf(c))) {
-                    throw new CaracteresEspecialesException();
-                }
-            }
-
-            for (int i = 0; i < nuevoTelefono.length(); i++) {
-                char c = nuevoTelefono.charAt(i);
-                if (caracteresProhibidos.contains(String.valueOf(c))) {
-                    throw new CaracteresEspecialesException();
-                }
-            }
-
-            for (int i = 0; i < nuevoCorreoElectronico.length(); i++) {
-                char c = nuevoCorreoElectronico.charAt(i);
-                if (caracteresProhibidos.contains(String.valueOf(c))) {
-                    throw new CaracteresEspecialesException();
-                }
-            }
-
-            Amigo amigo = new Amigo(nuevoNombre, telefono, nuevoCorreoElectronico);
-            boolean actualizado = this.directorio.actualizarAmigo(this.amigo.getNombre(), this.amigo.getTelefono(), this.amigo.getCorreo(),
-            new Amigo(nuevoNombre, telefono, nuevoCorreoElectronico));
-
-            if (actualizado) {
-                JOptionPane.showMessageDialog(this, "El amigo " + nuevoNombre + " ha sido actualizado exitosamente");
-                this.dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Error: No se pudo actualizar el amigo.");
-            }
-        } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (DatosObligatoriosException e) {
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (TelefonoInvalidoException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (CorreoInvalidoException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (NumeroTelefonoNegativoException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (AmigoDuplicadoException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (CaracteresEspecialesException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
-        } catch (FormatoInvalidoException e){
-            JOptionPane.showMessageDialog(this, e.getMessage());
+        if (actualizado) {
+            JOptionPane.showMessageDialog(this, "El amigo " + nuevoNombre + " ha sido actualizado exitosamente");
+            this.dispose();
+        } else {
+            JOptionPane.showMessageDialog(this, "Error: No se pudo actualizar el amigo.");
         }
-        this.dispose();
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(this, e.getMessage());
+    }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

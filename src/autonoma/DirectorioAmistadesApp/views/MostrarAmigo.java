@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -29,15 +30,15 @@ public class MostrarAmigo extends javax.swing.JDialog {
     /**
      * Creates new form MostrarAmigo
      */
-    public MostrarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio) {
+    public MostrarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio,Amigo amigo) {
         super(parent, modal);
         initComponents();
         setSize(650, 500);
         setResizable(false);
         this.setLocationRelativeTo(null);
+        
         this.directorio = directorio;
         this.amigo = amigo;
-        this.ventana = ventana;
         this.amigos = directorio.getAmigos(); 
         this.llenarTabla(this.amigos);
         
@@ -211,7 +212,7 @@ public class MostrarAmigo extends javax.swing.JDialog {
     
     if (fila >= 0) {
         Amigo amigo = this.amigos.get(fila);
-        ActualizarAmigo ventanaActualizar = new ActualizarAmigo(ventana, true, directorio, ventana, amigo);
+        ActualizarAmigo ventanaActualizar = new ActualizarAmigo((Frame) SwingUtilities.getWindowAncestor(this), true, directorio,amigo);
         ventanaActualizar.setVisible(true);
         llenarTabla(directorio.getAmigos());
     } else {

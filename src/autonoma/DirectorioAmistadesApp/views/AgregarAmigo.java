@@ -23,17 +23,15 @@ import javax.swing.JOptionPane;
  */
 public class AgregarAmigo extends javax.swing.JDialog {
     private DirectorioAmigo directorio;
-    private Amigo amigo;
-    private VentanaPrincipal ventana;
+    
 
-    public AgregarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio, VentanaPrincipal ventana, Amigo amigo) {
+    public AgregarAmigo(java.awt.Frame parent, boolean modal, DirectorioAmigo directorio) {
         super(parent, modal);
         initComponents();
         setSize(650, 500);
         setResizable(false);
         this.setLocationRelativeTo(null);
         this.directorio = directorio;
-        this.amigo = amigo;
         
         try { 
             this.setIconImage(new ImageIcon(getClass().getResource("/autonoma/DirectorioAmistadesApp/images/directorioAmistad.png")).getImage());
@@ -241,9 +239,11 @@ public class AgregarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtCorreoElectronicoActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-       String nombre = this.txtNombre.getText();
-       String telefonoStr = txtTelefono.getText().trim();
-       String correoElectronico = this.txtCorreoElectronico.getText();
+
+    String nombre = this.txtNombre.getText();
+    String telefonoStr = txtTelefono.getText().trim();
+    String correoElectronico = this.txtCorreoElectronico.getText();
+
 
         try {
         
