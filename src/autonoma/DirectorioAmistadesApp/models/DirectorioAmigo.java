@@ -185,7 +185,14 @@ public class DirectorioAmigo {
    public ArrayList<Amigo> obtenerTodosLosAmigos() {
     return amigos;
 }
-
+public Amigo obtenerAmigo(String nombre, long telefono, String correo) throws AmigoNoEncontradoException {
+    for (Amigo amigo : amigos) {
+        if (amigo.getNombre().equals(nombre) && amigo.getTelefono() == telefono && amigo.getCorreo().equals(correo)) {
+            return amigo; 
+        }
+    }
+    throw new AmigoNoEncontradoException();
+}
     
     /**
      * Proporciona información sobre la aplicación, incluyendo los nombres de los desarrolladores,
