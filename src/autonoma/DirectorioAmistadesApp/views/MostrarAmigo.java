@@ -210,14 +210,14 @@ public class MostrarAmigo extends javax.swing.JDialog {
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
        int fila = this.tablaAmigos.getSelectedRow();
     
-    if (fila >= 0) {
-        Amigo amigo = this.amigos.get(fila);
-        ActualizarAmigo ventanaActualizar = new ActualizarAmigo((Frame) SwingUtilities.getWindowAncestor(this), true, directorio,amigo);
-        ventanaActualizar.setVisible(true);
-        llenarTabla(directorio.getAmigos());
-    } else {
-        JOptionPane.showMessageDialog(this, "Por favor, seleccione el amigo que desea actualizar");
-    }
+        if (fila >= 0) {
+            Amigo amigo = this.amigos.get(fila);
+            ActualizarAmigo ventanaActualizar = new ActualizarAmigo((Frame) SwingUtilities.getWindowAncestor(this), true, directorio,amigo);
+            ventanaActualizar.setVisible(true);
+            llenarTabla(directorio.getAmigos());
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione el amigo que desea actualizar");
+        }
     }//GEN-LAST:event_btnActualizarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed

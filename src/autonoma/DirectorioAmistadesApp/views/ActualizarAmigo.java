@@ -247,68 +247,68 @@ public class ActualizarAmigo extends javax.swing.JDialog {
     }//GEN-LAST:event_txtNuevoCorreoElectronicoActionPerformed
 
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
-     String nuevoNombre = this.txtNuevoNombre.getText().trim();
-    String nuevoTelefono = this.txtNuevoTelefono.getText().trim();
-    String nuevoCorreoElectronico = this.txtNuevoCorreoElectronico.getText().trim();
+        String nuevoNombre = this.txtNuevoNombre.getText().trim();
+        String nuevoTelefono = this.txtNuevoTelefono.getText().trim();
+        String nuevoCorreoElectronico = this.txtNuevoCorreoElectronico.getText().trim();
 
    
-    if (amigo == null) {
-        JOptionPane.showMessageDialog(this, "Error: No se ha seleccionado un amigo.");
-        return;
-    }
-
-    
-    if (nuevoNombre.equals(amigo.getNombre()) &&
-        nuevoTelefono.equals(String.valueOf(amigo.getTelefono())) &&
-        nuevoCorreoElectronico.equals(amigo.getCorreo())) {
-        JOptionPane.showMessageDialog(this, "No hay cambios en los datos.");
-        this.dispose();
-        return; 
-    }
-
-  
-    long telefonoConvertido;
-    try {
-        telefonoConvertido = Long.parseLong(nuevoTelefono);
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(this, "Error: El teléfono debe ser un número válido.");
-        return;
-    }
-
-    try {
-        
-        directorio.validarAmigo(nuevoNombre, nuevoTelefono, nuevoCorreoElectronico);
-
-       
-        boolean actualizado = directorio.actualizarAmigo(
-            amigo.getNombre(), amigo.getTelefono(), amigo.getCorreo(),
-            new Amigo(nuevoNombre, telefonoConvertido, nuevoCorreoElectronico)
-        );
-
-        if (actualizado) {
-            JOptionPane.showMessageDialog(this, "El amigo " + nuevoNombre + " ha sido actualizado exitosamente");
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "Error: No se pudo actualizar el amigo.");
+        if (amigo == null) {
+            JOptionPane.showMessageDialog(this, "Error: No se ha seleccionado un amigo.");
+            return;
         }
 
-    } catch (AmigoNoEncontradoException e) {
-        JOptionPane.showMessageDialog(this, "Error: No se encontró el amigo para actualizar.");
-    } catch (DatosObligatoriosException e) {
-        JOptionPane.showMessageDialog(this, "Error: Todos los campos son obligatorios.");
-    } catch (NumeroTelefonoNegativoException e) {
-        JOptionPane.showMessageDialog(this, "Error: El número de teléfono no puede ser negativo.");
-    } catch (TelefonoInvalidoException e) {
-        JOptionPane.showMessageDialog(this, "Error: El número de teléfono debe comenzar con '606' o '30'.");
-    } catch (CorreoInvalidoException e) {
-        JOptionPane.showMessageDialog(this, "Error: Correo electrónico no válido.");
-    } catch (AmigoDuplicadoException e) {
-        JOptionPane.showMessageDialog(this, "Error: Ya existe un amigo con este correo.");
-    } catch (FormatoInvalidoException e) {
-        JOptionPane.showMessageDialog(this, "Error: El nombre no puede contener números.");
-    } catch (CaracteresEspecialesException e) {
-        JOptionPane.showMessageDialog(this, "Error: No se permiten caracteres especiales en los campos.");
-    }
+    
+        if (nuevoNombre.equals(amigo.getNombre()) &&
+            nuevoTelefono.equals(String.valueOf(amigo.getTelefono())) &&
+            nuevoCorreoElectronico.equals(amigo.getCorreo())) {
+            JOptionPane.showMessageDialog(this, "No hay cambios en los datos.");
+            this.dispose();
+            return; 
+        }
+
+  
+        long telefonoConvertido;
+        try {
+            telefonoConvertido = Long.parseLong(nuevoTelefono);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Error: El teléfono debe ser un número válido.");
+            return;
+        }
+
+        try {
+        
+            directorio.validarAmigo(nuevoNombre, nuevoTelefono, nuevoCorreoElectronico);
+
+       
+            boolean actualizado = directorio.actualizarAmigo(
+            amigo.getNombre(), amigo.getTelefono(), amigo.getCorreo(),
+            new Amigo(nuevoNombre, telefonoConvertido, nuevoCorreoElectronico)
+            );
+
+            if (actualizado) {
+                JOptionPane.showMessageDialog(this, "El amigo " + nuevoNombre + " ha sido actualizado exitosamente");
+                this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Error: No se pudo actualizar el amigo.");
+            }
+
+        } catch (AmigoNoEncontradoException e) {
+            JOptionPane.showMessageDialog(this, "Error: No se encontró el amigo para actualizar.");
+        } catch (DatosObligatoriosException e) {
+            JOptionPane.showMessageDialog(this, "Error: Todos los campos son obligatorios.");
+        } catch (NumeroTelefonoNegativoException e) {
+            JOptionPane.showMessageDialog(this, "Error: El número de teléfono no puede ser negativo.");
+        } catch (TelefonoInvalidoException e) {
+            JOptionPane.showMessageDialog(this, "Error: El número de teléfono debe comenzar con '606' o '30'.");
+        } catch (CorreoInvalidoException e) {
+            JOptionPane.showMessageDialog(this, "Error: Correo electrónico no válido.");
+        } catch (AmigoDuplicadoException e) {
+            JOptionPane.showMessageDialog(this, "Error: Ya existe un amigo con este correo.");
+        } catch (FormatoInvalidoException e) {
+            JOptionPane.showMessageDialog(this, "Error: El nombre no puede contener números.");
+        } catch (CaracteresEspecialesException e) {
+            JOptionPane.showMessageDialog(this, "Error: No se permiten caracteres especiales en los campos.");
+        }
     
     }//GEN-LAST:event_btnActualizarActionPerformed
 
